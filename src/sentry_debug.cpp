@@ -22,7 +22,6 @@
 #include "tools/math_tools.hpp"
 #include "tools/plotter.hpp"
 #include "tools/recorder.hpp"
-#include "tools/config_reloader.hpp"
 
 using namespace std::chrono;
 
@@ -57,13 +56,6 @@ int main(int argc, char * argv[])
   auto_aim::Shooter shooter(config_path);
 
   omniperception::Decider decider(config_path);
-
-  // 配置热重载器：监控YAML文件变化，自动重载参数
-  tools::ConfigReloader reloader(config_path);
-  reloader.add_callback([&](const YAML::Node & yaml) {
-    aimer.reload(yaml);
-    camera.reload(yaml);
-  });
 
   cv::Mat img;
 
@@ -199,12 +191,6 @@ int main(int argc, char * argv[])
     cv::imshow("reprojection", img);
     auto key = cv::waitKey(1);
     if (key == 'q') break;
-    if (key == 'r') {
-      tools::logger()->info("[Manual] Force reloading config...");
-      reloader.force_reload();
-    }
-    // 自动检测YAML文件变化并重载
-    reloader.check();
   }
   return 0;
 }

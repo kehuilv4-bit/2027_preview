@@ -19,7 +19,6 @@
 #include "tools/math_tools.hpp"
 #include "tools/plotter.hpp"
 #include "tools/recorder.hpp"
-#include "tools/config_reloader.hpp"
 
 const std::string keys =
   "{help h usage ? |                        | 输出命令行参数说明}"
@@ -49,13 +48,6 @@ int main(int argc, char * argv[])
   auto_aim::Aimer aimer(config_path);
   auto_aim::Shooter shooter(config_path);
   auto_aim::multithread::CommandGener commandgener(shooter, aimer, cboard, plotter, true);
-
-  // 配置热重载器
-  tools::ConfigReloader reloader(config_path);
-  reloader.add_callback([&](const YAML::Node & yaml) {
-    aimer.reload(yaml);
-    camera.reload(yaml);
-  });
 
   auto detect_thread = std::thread([&]() {
     cv::Mat img;
@@ -173,11 +165,6 @@ int main(int argc, char * argv[])
     cv::imshow("reprojection", img);
     auto key = cv::waitKey(1);
     if (key == 'q') break;
-    if (key == 'r') {
-      tools::logger()->info("[Manual] Force reloading config...");
-      reloader.force_reload();
-    }
-    reloader.check();
   }
 
   detect_thread.join();

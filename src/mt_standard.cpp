@@ -21,7 +21,6 @@
 #include "tools/math_tools.hpp"
 #include "tools/plotter.hpp"
 #include "tools/recorder.hpp"
-#include "tools/config_reloader.hpp"
 
 const std::string keys =
   "{help h usage ? | | 输出命令行参数说明}"
@@ -56,14 +55,6 @@ int main(int argc, char * argv[])
   auto_buff::SmallTarget buff_small_target;
   auto_buff::BigTarget buff_big_target;
   auto_buff::Aimer buff_aimer(config_path);
-
-  // 配置热重载器
-  tools::ConfigReloader reloader(config_path);
-  reloader.add_callback([&](const YAML::Node & yaml) {
-    aimer.reload(yaml);
-    buff_aimer.reload(yaml);
-    camera.reload(yaml);
-  });
 
   auto_aim::multithread::CommandGener commandgener(shooter, aimer, cboard, plotter);
 
@@ -149,9 +140,6 @@ int main(int argc, char * argv[])
 
     } else
       continue;
-
-    // 自动检测YAML文件变化并重载参数
-    reloader.check();
   }
 
   detect_thread.join();
