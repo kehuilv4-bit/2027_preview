@@ -1,0 +1,211 @@
+[0.000000] (-) TimerEvent: {}
+[0.000442] (sp_vision) JobQueued: {'identifier': 'sp_vision', 'dependencies': OrderedDict()}
+[0.001132] (sp_vision) JobStarted: {'identifier': 'sp_vision'}
+[0.009151] (sp_vision) JobProgress: {'identifier': 'sp_vision', 'progress': 'cmake'}
+[0.010351] (sp_vision) JobProgress: {'identifier': 'sp_vision', 'progress': 'build'}
+[0.010941] (sp_vision) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/adam/tongji/sp_vision_25/build/sp_vision', '--', '-j4', '-l4'], 'cwd': '/home/adam/tongji/sp_vision_25/build/sp_vision', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'zh_CN:zh'), ('USER', 'adam'), ('XDG_SESSION_TYPE', 'wayland'), ('ALLUSERSPROFILE', '/opt/MVS/MVFG'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/intel/openvino_2024.6.0/runtime/3rdparty/tbb/lib:/opt/intel/openvino_2024.6.0/runtime/lib/intel64:/opt/MVS/lib/64:/opt/MVS/lib/32:/opt/MVS/lib/64:/opt/MVS/lib/32:/opt/intel/openvino_2024.6.0/runtime/3rdparty/tbb/lib:/opt/intel/openvino_2024.6.0/runtime/lib/intel64:/opt/MVS/lib/64:/opt/MVS/lib/32:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/opt/MVS/lib/64:/opt/MVS/lib/32:/opt/MVS/lib/64:/opt/MVS/lib/32:/opt/MVS/lib/64:/opt/MVS/lib/32:'), ('TBB_DIR', '/opt/intel/openvino_2024.6.0/runtime/3rdparty/tbb/lib/cmake/TBB'), ('HOME', '/home/adam'), ('CHROME_DESKTOP', 'code-url-handler.desktop'), ('TERM_PROGRAM_VERSION', '1.86.2'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/code.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('INTEL_OPENVINO_DIR', '/opt/intel/openvino_2024.6.0'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('MANAGERPID', '1116'), ('SYSTEMD_EXEC_PID', '1347'), ('IM_CONFIG_CHECK_ENV', '1'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '4530'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/adam/tongji/sp_vision_25/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'adam'), ('JOURNAL_STREAM', '8:10638'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/opt/intel/openvino_2024.6.0/runtime/lib/intel64/pkgconfig:/opt/intel/openvino_2024.6.0/runtime/lib/intel64/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'adam'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('MVCAM_SDK_PATH', '/opt/MVS'), ('PATH', '/home/adam/.local/bin:/opt/ros/humble/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/dam:@/tmp/.ICE-unix/1313,unix/dam:/tmp/.ICE-unix/1313'), ('INVOCATION_ID', 'dd870af6cb974971961fdebc7998f187'), ('MVCAM_GENICAM_CLPROTOCOL', '/opt/MVS/lib/CLProtocol'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'zh_CN.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.6PC8J3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-01c21484b0.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/adam/tongji/sp_vision_25/build/sp_vision'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/intel/openvino_2024.6.0/python:/opt/intel/openvino_2024.6.0/python/python3:/opt/intel/openvino_2024.6.0/python:/opt/intel/openvino_2024.6.0/python/python3:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('MVCAM_SDK_VERSION', ''), ('COLCON', '1'), ('OpenVINO_DIR', '/opt/intel/openvino_2024.6.0/runtime/cmake'), ('MVCAM_COMMON_RUNENV', '/opt/MVS/lib')]), 'shell': False}
+[0.069285] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target tinympcstatic\x1b[0m\n'}
+[0.084905] (sp_vision) StdoutLine: {'line': b'[  4%] Built target tinympcstatic\n'}
+[0.096049] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target omniperception\x1b[0m\n'}
+[0.099876] (-) TimerEvent: {}
+[0.111243] (sp_vision) StdoutLine: {'line': b'[  6%] Built target omniperception\n'}
+[0.125721] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target tools\x1b[0m\n'}
+[0.145700] (sp_vision) StdoutLine: {'line': b'[ 16%] Built target tools\n'}
+[0.155989] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target serial\x1b[0m\n'}
+[0.167199] (sp_vision) StdoutLine: {'line': b'[ 20%] Built target serial\n'}
+[0.177114] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target calibrate_robotworld_handeye\x1b[0m\n'}
+[0.190672] (sp_vision) StdoutLine: {'line': b'[ 21%] Built target calibrate_robotworld_handeye\n'}
+[0.199967] (-) TimerEvent: {}
+[0.200298] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target split_video\x1b[0m\n'}
+[0.214303] (sp_vision) StdoutLine: {'line': b'[ 22%] Built target split_video\n'}
+[0.228297] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target io\x1b[0m\n'}
+[0.247498] (sp_vision) StdoutLine: {'line': b'[ 29%] Built target io\n'}
+[0.257669] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target calibrate_handeye\x1b[0m\n'}
+[0.271182] (sp_vision) StdoutLine: {'line': b'[ 31%] Built target calibrate_handeye\n'}
+[0.280672] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target capture\x1b[0m\n'}
+[0.293870] (sp_vision) StdoutLine: {'line': b'[ 33%] Built target capture\n'}
+[0.300066] (-) TimerEvent: {}
+[0.303188] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target camera_test\x1b[0m\n'}
+[0.317656] (sp_vision) StdoutLine: {'line': b'[ 35%] Built target camera_test\n'}
+[0.328488] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target cboard_test\x1b[0m\n'}
+[0.341174] (sp_vision) StdoutLine: {'line': b'[ 37%] Built target cboard_test\n'}
+[0.352313] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target fire_test\x1b[0m\n'}
+[0.366047] (sp_vision) StdoutLine: {'line': b'[ 39%] Built target fire_test\n'}
+[0.375343] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target gimbal_response_test\x1b[0m\n'}
+[0.388903] (sp_vision) StdoutLine: {'line': b'[ 41%] Built target gimbal_response_test\n'}
+[0.398435] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target multi_usbcamera_test\x1b[0m\n'}
+[0.400129] (-) TimerEvent: {}
+[0.411695] (sp_vision) StdoutLine: {'line': b'[ 43%] Built target multi_usbcamera_test\n'}
+[0.421642] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target usbcamera_test\x1b[0m\n'}
+[0.435077] (sp_vision) StdoutLine: {'line': b'[ 45%] Built target usbcamera_test\n'}
+[0.444301] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target dm_test\x1b[0m\n'}
+[0.457031] (sp_vision) StdoutLine: {'line': b'[ 46%] Built target dm_test\n'}
+[0.479487] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target auto_aim\x1b[0m\n'}
+[0.500244] (-) TimerEvent: {}
+[0.519550] (sp_vision) StdoutLine: {'line': b'[ 59%] Built target auto_aim\n'}
+[0.529617] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target calibrate_camera\x1b[0m\n'}
+[0.542442] (sp_vision) StdoutLine: {'line': b'[ 61%] Built target calibrate_camera\n'}
+[0.552455] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target auto_aim_test\x1b[0m\n'}
+[0.567175] (sp_vision) StdoutLine: {'line': b'[ 63%] Built target auto_aim_test\n'}
+[0.577132] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target camera_detect_test\x1b[0m\n'}
+[0.590399] (sp_vision) StdoutLine: {'line': b'[ 65%] Built target camera_detect_test\n'}
+[0.600369] (-) TimerEvent: {}
+[0.600575] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target camera_thread_test\x1b[0m\n'}
+[0.615696] (sp_vision) StdoutLine: {'line': b'[ 66%] Built target camera_thread_test\n'}
+[0.626327] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target detector_video_test\x1b[0m\n'}
+[0.640965] (sp_vision) StdoutLine: {'line': b'[ 68%] Built target detector_video_test\n'}
+[0.651368] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target usbcamera_detect_test\x1b[0m\n'}
+[0.664846] (sp_vision) StdoutLine: {'line': b'[ 70%] Built target usbcamera_detect_test\n'}
+[0.674825] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target handeye_test\x1b[0m\n'}
+[0.689362] (sp_vision) StdoutLine: {'line': b'[ 71%] Built target handeye_test\n'}
+[0.698976] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target minimum_vision_system\x1b[0m\n'}
+[0.700446] (-) TimerEvent: {}
+[0.714793] (sp_vision) StdoutLine: {'line': b'[ 73%] Built target minimum_vision_system\n'}
+[0.725223] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target gimbal_test\x1b[0m\n'}
+[0.739194] (sp_vision) StdoutLine: {'line': b'[ 75%] Built target gimbal_test\n'}
+[0.749596] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target planner_test\x1b[0m\n'}
+[0.763300] (sp_vision) StdoutLine: {'line': b'[ 76%] Built target planner_test\n'}
+[0.773371] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target planner_test_offline\x1b[0m\n'}
+[0.787846] (sp_vision) StdoutLine: {'line': b'[ 78%] Built target planner_test_offline\n'}
+[0.797446] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target uav_debug\x1b[0m\n'}
+[0.800518] (-) TimerEvent: {}
+[0.812350] (sp_vision) StdoutLine: {'line': b'[ 80%] Built target uav_debug\n'}
+[0.826730] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target auto_buff\x1b[0m\n'}
+[0.850514] (sp_vision) StdoutLine: {'line': b'[ 85%] Built target auto_buff\n'}
+[0.860436] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target standard\x1b[0m\n'}
+[0.874821] (sp_vision) StdoutLine: {'line': b'[ 87%] Built target standard\n'}
+[0.885417] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target auto_aim_debug_mpc\x1b[0m\n'}
+[0.899995] (sp_vision) StdoutLine: {'line': b'[ 89%] Built target auto_aim_debug_mpc\n'}
+[0.900591] (-) TimerEvent: {}
+[0.910724] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target mt_auto_aim_debug\x1b[0m\n'}
+[0.925651] (sp_vision) StdoutLine: {'line': b'[ 91%] Built target mt_auto_aim_debug\n'}
+[0.937042] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target auto_buff_debug\x1b[0m\n'}
+[0.954410] (sp_vision) StdoutLine: {'line': b'[ 93%] Built target auto_buff_debug\n'}
+[0.964098] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target auto_buff_debug_mpc\x1b[0m\n'}
+[0.979736] (sp_vision) StdoutLine: {'line': b'[ 94%] Built target auto_buff_debug_mpc\n'}
+[0.989450] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target uav\x1b[0m\n'}
+[1.000700] (-) TimerEvent: {}
+[1.004965] (sp_vision) StdoutLine: {'line': b'[ 95%] Built target uav\n'}
+[1.015911] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target auto_buff_test\x1b[0m\n'}
+[1.033295] (sp_vision) StdoutLine: {'line': b'[ 97%] Built target auto_buff_test\n'}
+[1.044725] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target standard_mpc\x1b[0m\n'}
+[1.060896] (sp_vision) StdoutLine: {'line': b'[ 99%] Built target standard_mpc\n'}
+[1.070828] (sp_vision) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target mt_standard\x1b[0m\n'}
+[1.086791] (sp_vision) StdoutLine: {'line': b'[ 99%] \x1b[32mBuilding CXX object CMakeFiles/mt_standard.dir/src/mt_standard.cpp.o\x1b[0m\n'}
+[1.100799] (-) TimerEvent: {}
+[1.201045] (-) TimerEvent: {}
+[1.301550] (-) TimerEvent: {}
+[1.401817] (-) TimerEvent: {}
+[1.502069] (-) TimerEvent: {}
+[1.602385] (-) TimerEvent: {}
+[1.702724] (-) TimerEvent: {}
+[1.803035] (-) TimerEvent: {}
+[1.903285] (-) TimerEvent: {}
+[2.003541] (-) TimerEvent: {}
+[2.103793] (-) TimerEvent: {}
+[2.204052] (-) TimerEvent: {}
+[2.304314] (-) TimerEvent: {}
+[2.404581] (-) TimerEvent: {}
+[2.505089] (-) TimerEvent: {}
+[2.605884] (-) TimerEvent: {}
+[2.706158] (-) TimerEvent: {}
+[2.806423] (-) TimerEvent: {}
+[2.907017] (-) TimerEvent: {}
+[3.007277] (-) TimerEvent: {}
+[3.107533] (-) TimerEvent: {}
+[3.208151] (-) TimerEvent: {}
+[3.308435] (-) TimerEvent: {}
+[3.408690] (-) TimerEvent: {}
+[3.508947] (-) TimerEvent: {}
+[3.609197] (-) TimerEvent: {}
+[3.709442] (-) TimerEvent: {}
+[3.809693] (-) TimerEvent: {}
+[3.909970] (-) TimerEvent: {}
+[4.010218] (-) TimerEvent: {}
+[4.110471] (-) TimerEvent: {}
+[4.210761] (-) TimerEvent: {}
+[4.311032] (-) TimerEvent: {}
+[4.411286] (-) TimerEvent: {}
+[4.511550] (-) TimerEvent: {}
+[4.611797] (-) TimerEvent: {}
+[4.712050] (-) TimerEvent: {}
+[4.812318] (-) TimerEvent: {}
+[4.912574] (-) TimerEvent: {}
+[5.012859] (-) TimerEvent: {}
+[5.113129] (-) TimerEvent: {}
+[5.213386] (-) TimerEvent: {}
+[5.313646] (-) TimerEvent: {}
+[5.413879] (-) TimerEvent: {}
+[5.517135] (-) TimerEvent: {}
+[5.617430] (-) TimerEvent: {}
+[5.717707] (-) TimerEvent: {}
+[5.817961] (-) TimerEvent: {}
+[5.918209] (-) TimerEvent: {}
+[6.018586] (-) TimerEvent: {}
+[6.118874] (-) TimerEvent: {}
+[6.219393] (-) TimerEvent: {}
+[6.319661] (-) TimerEvent: {}
+[6.419882] (-) TimerEvent: {}
+[6.520293] (-) TimerEvent: {}
+[6.620791] (-) TimerEvent: {}
+[6.721186] (-) TimerEvent: {}
+[6.821509] (-) TimerEvent: {}
+[6.921772] (-) TimerEvent: {}
+[7.022028] (-) TimerEvent: {}
+[7.122278] (-) TimerEvent: {}
+[7.222532] (-) TimerEvent: {}
+[7.322765] (-) TimerEvent: {}
+[7.423032] (-) TimerEvent: {}
+[7.523285] (-) TimerEvent: {}
+[7.623532] (-) TimerEvent: {}
+[7.723785] (-) TimerEvent: {}
+[7.824049] (-) TimerEvent: {}
+[7.924290] (-) TimerEvent: {}
+[8.024534] (-) TimerEvent: {}
+[8.124778] (-) TimerEvent: {}
+[8.225025] (-) TimerEvent: {}
+[8.325275] (-) TimerEvent: {}
+[8.425522] (-) TimerEvent: {}
+[8.526029] (-) TimerEvent: {}
+[8.626322] (-) TimerEvent: {}
+[8.726593] (-) TimerEvent: {}
+[8.826849] (-) TimerEvent: {}
+[8.927096] (-) TimerEvent: {}
+[9.027341] (-) TimerEvent: {}
+[9.127583] (-) TimerEvent: {}
+[9.227835] (-) TimerEvent: {}
+[9.328079] (-) TimerEvent: {}
+[9.428326] (-) TimerEvent: {}
+[9.528581] (-) TimerEvent: {}
+[9.628838] (-) TimerEvent: {}
+[9.729091] (-) TimerEvent: {}
+[9.829409] (-) TimerEvent: {}
+[9.929763] (-) TimerEvent: {}
+[10.030010] (-) TimerEvent: {}
+[10.130264] (-) TimerEvent: {}
+[10.230527] (-) TimerEvent: {}
+[10.330868] (-) TimerEvent: {}
+[10.431076] (-) TimerEvent: {}
+[10.531346] (-) TimerEvent: {}
+[10.631604] (-) TimerEvent: {}
+[10.731858] (-) TimerEvent: {}
+[10.832116] (-) TimerEvent: {}
+[10.932380] (-) TimerEvent: {}
+[11.032637] (-) TimerEvent: {}
+[11.132873] (-) TimerEvent: {}
+[11.233131] (-) TimerEvent: {}
+[11.240664] (sp_vision) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable mt_standard\x1b[0m\n'}
+[11.333231] (-) TimerEvent: {}
+[11.433469] (-) TimerEvent: {}
+[11.533738] (-) TimerEvent: {}
+[11.634020] (-) TimerEvent: {}
+[11.734282] (-) TimerEvent: {}
+[11.834552] (-) TimerEvent: {}
+[11.935598] (-) TimerEvent: {}
+[12.035888] (-) TimerEvent: {}
+[12.136944] (-) TimerEvent: {}
+[12.237786] (-) TimerEvent: {}
+[12.239041] (sp_vision) StdoutLine: {'line': b'[100%] Built target mt_standard\n'}
+[12.249469] (sp_vision) CommandEnded: {'returncode': 0}
+[12.261567] (sp_vision) JobEnded: {'identifier': 'sp_vision', 'rc': 0}
+[12.262189] (-) EventReactorShutdown: {}

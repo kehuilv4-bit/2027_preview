@@ -1,0 +1,80 @@
+[35m[1mConsolidate compiler generated dependencies of target tinympcstatic[0m
+[  4%] Built target tinympcstatic
+[35m[1mConsolidate compiler generated dependencies of target omniperception[0m
+[  6%] Built target omniperception
+[35m[1mConsolidate compiler generated dependencies of target tools[0m
+[ 16%] Built target tools
+[35m[1mConsolidate compiler generated dependencies of target serial[0m
+[ 20%] Built target serial
+[35m[1mConsolidate compiler generated dependencies of target calibrate_robotworld_handeye[0m
+[ 21%] Built target calibrate_robotworld_handeye
+[35m[1mConsolidate compiler generated dependencies of target split_video[0m
+[ 22%] Built target split_video
+[35m[1mConsolidate compiler generated dependencies of target io[0m
+[ 29%] Built target io
+[35m[1mConsolidate compiler generated dependencies of target calibrate_handeye[0m
+[ 31%] Built target calibrate_handeye
+[35m[1mConsolidate compiler generated dependencies of target capture[0m
+[ 33%] Built target capture
+[35m[1mConsolidate compiler generated dependencies of target camera_test[0m
+[ 35%] Built target camera_test
+[35m[1mConsolidate compiler generated dependencies of target cboard_test[0m
+[ 37%] Built target cboard_test
+[35m[1mConsolidate compiler generated dependencies of target fire_test[0m
+[ 39%] Built target fire_test
+[35m[1mConsolidate compiler generated dependencies of target gimbal_response_test[0m
+[ 41%] Built target gimbal_response_test
+[35m[1mConsolidate compiler generated dependencies of target multi_usbcamera_test[0m
+[ 43%] Built target multi_usbcamera_test
+[35m[1mConsolidate compiler generated dependencies of target usbcamera_test[0m
+[ 45%] Built target usbcamera_test
+[35m[1mConsolidate compiler generated dependencies of target dm_test[0m
+[ 46%] Built target dm_test
+[35m[1mConsolidate compiler generated dependencies of target auto_aim[0m
+[ 59%] Built target auto_aim
+[35m[1mConsolidate compiler generated dependencies of target calibrate_camera[0m
+[ 61%] Built target calibrate_camera
+[35m[1mConsolidate compiler generated dependencies of target auto_aim_test[0m
+[ 63%] Built target auto_aim_test
+[35m[1mConsolidate compiler generated dependencies of target camera_detect_test[0m
+[ 65%] Built target camera_detect_test
+[35m[1mConsolidate compiler generated dependencies of target camera_thread_test[0m
+[ 66%] Built target camera_thread_test
+[35m[1mConsolidate compiler generated dependencies of target detector_video_test[0m
+[ 68%] Built target detector_video_test
+[35m[1mConsolidate compiler generated dependencies of target usbcamera_detect_test[0m
+[ 70%] Built target usbcamera_detect_test
+[35m[1mConsolidate compiler generated dependencies of target handeye_test[0m
+[ 71%] Built target handeye_test
+[35m[1mConsolidate compiler generated dependencies of target minimum_vision_system[0m
+[ 73%] Built target minimum_vision_system
+[35m[1mConsolidate compiler generated dependencies of target gimbal_test[0m
+[ 75%] Built target gimbal_test
+[35m[1mConsolidate compiler generated dependencies of target planner_test[0m
+[ 76%] Built target planner_test
+[35m[1mConsolidate compiler generated dependencies of target planner_test_offline[0m
+[ 78%] Built target planner_test_offline
+[35m[1mConsolidate compiler generated dependencies of target uav_debug[0m
+[ 80%] Built target uav_debug
+[35m[1mConsolidate compiler generated dependencies of target auto_buff[0m
+[ 85%] Built target auto_buff
+[35m[1mConsolidate compiler generated dependencies of target standard[0m
+[ 87%] Built target standard
+[35m[1mConsolidate compiler generated dependencies of target auto_aim_debug_mpc[0m
+[ 89%] Built target auto_aim_debug_mpc
+[35m[1mConsolidate compiler generated dependencies of target mt_auto_aim_debug[0m
+[ 91%] Built target mt_auto_aim_debug
+[35m[1mConsolidate compiler generated dependencies of target auto_buff_debug[0m
+[ 93%] Built target auto_buff_debug
+[35m[1mConsolidate compiler generated dependencies of target auto_buff_debug_mpc[0m
+[ 94%] Built target auto_buff_debug_mpc
+[35m[1mConsolidate compiler generated dependencies of target uav[0m
+[ 95%] Built target uav
+[35m[1mConsolidate compiler generated dependencies of target auto_buff_test[0m
+[ 97%] Built target auto_buff_test
+[35m[1mConsolidate compiler generated dependencies of target standard_mpc[0m
+[ 99%] Built target standard_mpc
+[35m[1mConsolidate compiler generated dependencies of target mt_standard[0m
+[ 99%] [32mBuilding CXX object CMakeFiles/mt_standard.dir/src/mt_standard.cpp.o[0m
+[100%] [32m[1mLinking CXX executable mt_standard[0m
+[100%] Built target mt_standard

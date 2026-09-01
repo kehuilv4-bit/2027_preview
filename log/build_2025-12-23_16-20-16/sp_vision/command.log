@@ -1,0 +1,4 @@
+Invoking command in '/home/adam/tongji/sp_vision_25/build/sp_vision': /usr/bin/cmake /home/adam/tongji/sp_vision_25 -DCMAKE_INSTALL_PREFIX=/home/adam/tongji/sp_vision_25/install/sp_vision
+Invoked command in '/home/adam/tongji/sp_vision_25/build/sp_vision' returned '0': /usr/bin/cmake /home/adam/tongji/sp_vision_25 -DCMAKE_INSTALL_PREFIX=/home/adam/tongji/sp_vision_25/install/sp_vision
+Invoking command in '/home/adam/tongji/sp_vision_25/build/sp_vision': /usr/bin/cmake --build /home/adam/tongji/sp_vision_25/build/sp_vision -- -j8 -l8
+Invoked command in '/home/adam/tongji/sp_vision_25/build/sp_vision' returned '2': /usr/bin/cmake --build /home/adam/tongji/sp_vision_25/build/sp_vision -- -j8 -l8

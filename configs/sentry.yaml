@@ -1,0 +1,119 @@
+enemy_color: "red"
+# enemy_color: "blue"
+
+
+#####-----神经网络参数-----#####
+yolo_name: yolov5
+classify_model: assets/tiny_resnet.onnx
+yolo11_model_path: assets/yolo11.xml
+yolov8_model_path: assets/yolov8.xml
+yolov5_model_path: assets/yolov5.xml
+device: GPU
+min_confidence: 0.8
+use_traditional: true
+
+#####-----ROI-----#####
+roi: 
+  x: 420
+  y: 50
+  width: 600
+  height: 600
+
+use_roi: false
+
+# #####-----USB相机参数-----#####
+# image_width: 1280
+# image_height: 720
+# fov_h: 57.7 #87.7
+# fov_v: 56.7 
+# new_fov_h: 27 #67
+# new_fov_v: 40.9
+# usb_frame_rate: 120
+# usb_exposure: 500 #1-80000______250
+# usb_gamma: 160
+# usb_gain: 10 #0-96
+
+#####-----工业相机参数-----#####
+camera_name: "hikrobot"
+exposure_ms: 3
+gain: 8
+vid_pid: "2bdf:0001"
+
+#####-----传统方法参数-----#####
+threshold: 150 #二值化阈值
+max_angle_error: 45 # degree
+min_lightbar_ratio: 1.5
+max_lightbar_ratio: 20 #同上长宽比
+min_lightbar_length: 8 #最小长度
+min_armor_ratio: 1 #小装甲板长宽比
+max_armor_ratio: 5 #大装甲板长宽比
+max_side_ratio: 1.5 #最大边长比
+max_rectangular_error: 25 # 矩形度
+min_confidence: 0.8
+
+#####-----cboard参数-----#####
+quaternion_canid: 0x01
+bullet_speed_canid: 0x110
+send_canid: 0xff
+serial_port: "/dev/ttyUSB0"
+serial_baud: 115200
+
+#####-----gimbal参数-----#####
+com_port: "/dev/gimbal"
+
+#####-----tracker参数-----#####
+min_detect_count: 4 #最小连续识别帧数
+max_temp_lost_count: 30 #最大临时丢失帧数
+outpost_max_temp_lost_count: 75 #前哨最大临时丢失帧数
+
+#####-----aimer参数-----#####
+yaw_offset: 0.9 # degree 偏置 (原-0.6偏左,右移0.9)
+pitch_offset: 3 # degree (原2偏高,降低1.2)
+comming_angle: 47
+leaving_angle: 16
+left_yaw_offset: 1 
+right_yaw_offset: 1
+decision_speed: 1.5 # rad/s 决策速度阈值
+high_speed_delay_time: 0.032
+low_speed_delay_time: 0.03  # s
+
+#####-----shooter参数-----#####
+first_tolerance: 2.2 # 近距离射击容差，degree
+second_tolerance: 2.3 # 远距离射击容差，degree
+judge_distance: 3 #距离判断阈值
+auto_fire: true # 是否由自瞄控制射击
+
+# #####-----planner-----#####
+fire_thresh: 0.003
+
+max_yaw_acc: 50
+Q_yaw: [9e6, 0]
+R_yaw: [1]
+
+max_pitch_acc: 100
+Q_pitch: [9e6, 0]
+R_pitch: [1]
+
+####----方差----####
+v1: 200 #加速度方差
+v2: 350 #角速度方差
+
+#####-----decider参数-----#####
+mode: 1
+
+#####-----工业相机标定参数-----#####
+R_gimbal2imubody: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+
+# 重投影误差: 0.0296px
+camera_matrix: [1796.7051631424611, 0, 707.86139888664422, 0, 1794.8650483355925, 514.7564430977252, 0, 0, 1]
+distort_coeffs: [-0.053935005818347745, 0.099523851213960096, -0.0023468801956506758, 6.48251983705048e-05, 0]
+
+R_camera2gimbal: [0, 0, 1, -1, 0, 0, 0, -1, 0]
+t_camera2gimbal: [0.11994017, 0.0, 0.16147]
+
+#####-----buff参数-----#####
+model: "assets/yolo11_buff_int8.xml"
+
+#####-----buff_aimer参数-----#####
+fire_gap_time: 0.600 # s
+predict_time: 0.154 # s (原0.125提前量不够，增大)

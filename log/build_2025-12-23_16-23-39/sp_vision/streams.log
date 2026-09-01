@@ -1,0 +1,137 @@
+[0.008s] Invoking command in '/home/adam/tongji/sp_vision_25/build/sp_vision': /usr/bin/cmake --build /home/adam/tongji/sp_vision_25/build/sp_vision -- -j8 -l8
+[0.053s] [35m[1mConsolidate compiler generated dependencies of target serial[0m
+[0.053s] [35m[1mConsolidate compiler generated dependencies of target omniperception[0m
+[0.053s] [35m[1mConsolidate compiler generated dependencies of target tinympcstatic[0m
+[0.053s] [35m[1mConsolidate compiler generated dependencies of target tools[0m
+[0.068s] [  4%] Built target serial
+[0.072s] [  6%] Built target omniperception
+[0.075s] [ 10%] Built target tinympcstatic
+[0.078s] [ 20%] Built target tools
+[0.079s] [35m[1mConsolidate compiler generated dependencies of target io[0m
+[0.100s] [ 21%] [32mBuilding CXX object CMakeFiles/calibrate_robotworld_handeye.dir/calibration/calibrate_robotworld_handeye.cpp.o[0m
+[0.101s] [ 21%] [32mBuilding CXX object CMakeFiles/calibrate_camera.dir/calibration/calibrate_camera.cpp.o[0m
+[0.101s] [ 22%] [32mBuilding CXX object CMakeFiles/split_video.dir/calibration/split_video.cpp.o[0m
+[0.104s] [ 23%] [32mBuilding CXX object io/CMakeFiles/io.dir/mindvision/mindvision.cpp.o[0m
+[0.104s] [ 24%] [32mBuilding CXX object io/CMakeFiles/io.dir/gimbal/gimbal.cpp.o[0m
+[0.107s] [ 25%] [32mBuilding CXX object CMakeFiles/calibrate_handeye.dir/calibration/calibrate_handeye.cpp.o[0m
+[0.109s] [ 26%] [32mBuilding CXX object io/CMakeFiles/io.dir/cboard.cpp.o[0m
+[0.113s] [ 26%] [32mBuilding CXX object io/CMakeFiles/io.dir/dm_imu/dm_imu.cpp.o[0m
+[5.469s] [ 27%] [32m[1mLinking CXX executable calibrate_camera[0m
+[6.350s] [ 27%] Built target calibrate_camera
+[7.607s] [ 28%] [32m[1mLinking CXX executable calibrate_robotworld_handeye[0m
+[8.314s] [ 29%] [32m[1mLinking CXX executable calibrate_handeye[0m
+[8.356s] [ 29%] Built target calibrate_robotworld_handeye
+[8.956s] [ 29%] Built target calibrate_handeye
+[11.611s] [ 30%] [32m[1mLinking CXX static library libio.a[0m
+[11.667s] [ 30%] [32m[1mLinking CXX executable split_video[0m
+[11.672s] [ 33%] Built target io
+[12.053s] [ 33%] Built target split_video
+[12.071s] [ 34%] [32mBuilding CXX object CMakeFiles/multi_usbcamera_test.dir/tests/multi_usbcamera_test.cpp.o[0m
+[18.464s] [ 35%] [32m[1mLinking CXX executable multi_usbcamera_test[0m
+[18.884s] [ 35%] Built target multi_usbcamera_test
+[18.902s] [ 36%] [32mBuilding CXX object CMakeFiles/usbcamera_test.dir/tests/usbcamera_test.cpp.o[0m
+[25.245s] [ 37%] [32m[1mLinking CXX executable usbcamera_test[0m
+[25.641s] [ 37%] Built target usbcamera_test
+[25.657s] [ 37%] [32mBuilding CXX object CMakeFiles/dm_test.dir/tests/dm_test.cpp.o[0m
+[30.862s] [ 38%] [32m[1mLinking CXX executable dm_test[0m
+[31.224s] [ 38%] Built target dm_test
+[31.242s] [ 39%] [32mBuilding CXX object CMakeFiles/gimbal_response_test.dir/tests/gimbal_response_test.cpp.o[0m
+[31.242s] [ 40%] [32mBuilding CXX object CMakeFiles/fire_test.dir/tests/fire_test.cpp.o[0m
+[38.662s] [ 41%] [32m[1mLinking CXX executable fire_test[0m
+[38.838s] [ 42%] [32m[1mLinking CXX executable gimbal_response_test[0m
+[39.093s] [ 42%] Built target fire_test
+[39.269s] [ 42%] Built target gimbal_response_test
+[39.288s] [ 43%] [32mBuilding CXX object CMakeFiles/cboard_test.dir/tests/cboard_test.cpp.o[0m
+[45.815s] [ 44%] [32m[1mLinking CXX executable cboard_test[0m
+[46.183s] [ 44%] Built target cboard_test
+[46.200s] [ 45%] [32mBuilding CXX object CMakeFiles/camera_test.dir/tests/camera_test.cpp.o[0m
+[52.571s] [ 46%] [32m[1mLinking CXX executable camera_test[0m
+[52.989s] [ 46%] Built target camera_test
+[53.006s] [ 48%] [32mBuilding CXX object CMakeFiles/capture.dir/calibration/capture.cpp.o[0m
+[53.006s] [ 48%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/classifier.cpp.o[0m
+[53.006s] [ 48%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/armor.cpp.o[0m
+[54.015s] [ 49%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/tracker.cpp.o[0m
+[55.028s] [ 50%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/target.cpp.o[0m
+[55.579s] [ 51%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/aimer.cpp.o[0m
+[56.592s] [ 51%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/voter.cpp.o[0m
+[57.409s] [ 52%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/solver.cpp.o[0m
+[61.097s] [ 53%] [32m[1mLinking CXX executable capture[0m
+[61.635s] [ 53%] Built target capture
+[67.838s] [ 54%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/multithread/commandgener.cpp.o[0m
+[76.087s] [ 54%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/multithread/mt_detector.cpp.o[0m
+[84.303s] [ 55%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/planner/planner.cpp.o[0m
+[91.999s] [ 56%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/yolos/yolo11.cpp.o[0m
+[101.824s] [ 57%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/yolos/yolov8.cpp.o[0m
+[112.056s] [ 59%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/yolos/yolov5.cpp.o[0m
+[112.056s] [ 59%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/yolo.cpp.o[0m
+[115.417s] [ 60%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/shooter.cpp.o[0m
+[122.098s] [ 61%] [32mBuilding CXX object tasks/auto_aim/CMakeFiles/auto_aim.dir/detector.cpp.o[0m
+[131.719s] [ 61%] Built target auto_aim
+[131.735s] [ 63%] [32mBuilding CXX object CMakeFiles/uav_debug.dir/src/uav_debug.cpp.o[0m
+[131.735s] [ 63%] [32mBuilding CXX object tasks/auto_buff/CMakeFiles/auto_buff.dir/buff_type.cpp.o[0m
+[132.746s] [ 63%] [32mBuilding CXX object CMakeFiles/handeye_test.dir/tests/handeye_test.cpp.o[0m
+[134.757s] [ 64%] [32mBuilding CXX object CMakeFiles/usbcamera_detect_test.dir/tests/usbcamera_detect_test.cpp.o[0m
+[136.776s] [ 65%] [32mBuilding CXX object CMakeFiles/detector_video_test.dir/tests/detector_video_test.cpp.o[0m
+[139.987s] [ 65%] [32mBuilding CXX object tasks/auto_buff/CMakeFiles/auto_buff.dir/buff_detector.cpp.o[0m
+[142.468s] [ 66%] [32m[1mLinking CXX executable handeye_test[0m
+[142.619s] [ 67%] [32m[1mLinking CXX executable usbcamera_detect_test[0m
+[143.269s] [ 68%] [32m[1mLinking CXX executable detector_video_test[0m
+[143.300s] [ 68%] Built target handeye_test
+[143.631s] [ 68%] Built target usbcamera_detect_test
+[143.975s] [ 68%] Built target detector_video_test
+[145.126s] [ 69%] [32m[1mLinking CXX executable uav_debug[0m
+[145.826s] [ 69%] Built target uav_debug
+[149.554s] [ 70%] [32mBuilding CXX object tasks/auto_buff/CMakeFiles/auto_buff.dir/buff_solver.cpp.o[0m
+[153.876s] [ 71%] [32mBuilding CXX object tasks/auto_buff/CMakeFiles/auto_buff.dir/buff_aimer.cpp.o[0m
+[162.987s] [ 72%] [32mBuilding CXX object tasks/auto_buff/CMakeFiles/auto_buff.dir/buff_target.cpp.o[0m
+[174.429s] [ 73%] [32mBuilding CXX object tasks/auto_buff/CMakeFiles/auto_buff.dir/yolo11_buff.cpp.o[0m
+[182.085s] [ 73%] Built target auto_buff
+[182.102s] [ 74%] [32mBuilding CXX object CMakeFiles/planner_test_offline.dir/tests/planner_test_offline.cpp.o[0m
+[184.112s] [ 75%] [32mBuilding CXX object CMakeFiles/standard.dir/src/standard.cpp.o[0m
+[186.125s] [ 76%] [32mBuilding CXX object CMakeFiles/planner_test.dir/tests/planner_test.cpp.o[0m
+[190.063s] [ 77%] [32m[1mLinking CXX executable planner_test_offline[0m
+[190.711s] [ 77%] Built target planner_test_offline
+[192.573s] [ 78%] [32m[1mLinking CXX executable standard[0m
+[193.295s] [ 78%] Built target standard
+[194.320s] [ 78%] [32m[1mLinking CXX executable planner_test[0m
+[194.899s] [ 78%] Built target planner_test
+[194.917s] [ 79%] [32mBuilding CXX object CMakeFiles/standard_mpc.dir/src/standard_mpc.cpp.o[0m
+[197.929s] [ 80%] [32mBuilding CXX object CMakeFiles/auto_aim_debug_mpc.dir/src/auto_aim_debug_mpc.cpp.o[0m
+[199.940s] [ 80%] [32mBuilding CXX object CMakeFiles/mt_standard.dir/src/mt_standard.cpp.o[0m
+[201.951s] [ 81%] [32mBuilding CXX object CMakeFiles/gimbal_test.dir/tests/gimbal_test.cpp.o[0m
+[205.287s] [ 82%] [32m[1mLinking CXX executable standard_mpc[0m
+[206.188s] [ 82%] Built target standard_mpc
+[207.689s] [ 83%] [32m[1mLinking CXX executable auto_aim_debug_mpc[0m
+[208.500s] [ 83%] Built target auto_aim_debug_mpc
+[210.224s] [ 84%] [32m[1mLinking CXX executable gimbal_test[0m
+[210.626s] [ 85%] [32m[1mLinking CXX executable mt_standard[0m
+[210.878s] [ 85%] Built target gimbal_test
+[211.347s] [ 85%] Built target mt_standard
+[211.365s] [ 86%] [32mBuilding CXX object CMakeFiles/auto_buff_debug_mpc.dir/src/auto_buff_debug_mpc.cpp.o[0m
+[220.896s] [ 86%] [32m[1mLinking CXX executable auto_buff_debug_mpc[0m
+[221.425s] [ 86%] Built target auto_buff_debug_mpc
+[221.441s] [ 86%] [32mBuilding CXX object CMakeFiles/uav.dir/src/uav.cpp.o[0m
+[230.651s] [ 87%] [32m[1mLinking CXX executable uav[0m
+[231.336s] [ 87%] Built target uav
+[231.353s] [ 88%] [32mBuilding CXX object CMakeFiles/auto_buff_test.dir/tests/auto_buff_test.cpp.o[0m
+[240.741s] [ 89%] [32m[1mLinking CXX executable auto_buff_test[0m
+[241.231s] [ 89%] Built target auto_buff_test
+[241.248s] [ 91%] [32mBuilding CXX object CMakeFiles/mt_auto_aim_debug.dir/src/mt_auto_aim_debug.cpp.o[0m
+[241.248s] [ 91%] [32mBuilding CXX object CMakeFiles/auto_buff_debug.dir/src/auto_buff_debug.cpp.o[0m
+[251.237s] [ 92%] [32m[1mLinking CXX executable auto_buff_debug[0m
+[251.385s] [ 93%] [32m[1mLinking CXX executable mt_auto_aim_debug[0m
+[251.831s] [ 93%] Built target auto_buff_debug
+[252.138s] [ 93%] Built target mt_auto_aim_debug
+[252.156s] [ 94%] [32mBuilding CXX object CMakeFiles/minimum_vision_system.dir/tests/minimum_vision_system.cpp.o[0m
+[261.713s] [ 95%] [32m[1mLinking CXX executable minimum_vision_system[0m
+[262.336s] [ 95%] Built target minimum_vision_system
+[262.355s] [ 96%] [32mBuilding CXX object CMakeFiles/camera_thread_test.dir/tests/camera_thread_test.cpp.o[0m
+[270.802s] [ 96%] [32m[1mLinking CXX executable camera_thread_test[0m
+[271.439s] [ 96%] Built target camera_thread_test
+[271.455s] [ 97%] [32mBuilding CXX object CMakeFiles/camera_detect_test.dir/tests/camera_detect_test.cpp.o[0m
+[278.745s] [ 98%] [32m[1mLinking CXX executable camera_detect_test[0m
+[279.358s] [ 98%] Built target camera_detect_test
+[279.374s] [ 99%] [32mBuilding CXX object CMakeFiles/auto_aim_test.dir/tests/auto_aim_test.cpp.o[0m
+[288.447s] [100%] [32m[1mLinking CXX executable auto_aim_test[0m
+[289.029s] [100%] Built target auto_aim_test
+[289.041s] Invoked command in '/home/adam/tongji/sp_vision_25/build/sp_vision' returned '0': /usr/bin/cmake --build /home/adam/tongji/sp_vision_25/build/sp_vision -- -j8 -l8

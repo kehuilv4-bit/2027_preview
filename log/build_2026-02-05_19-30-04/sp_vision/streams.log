@@ -1,0 +1,82 @@
+[0.010s] Invoking command in '/home/adam/tongji/sp_vision_25/build/sp_vision': /usr/bin/cmake --build /home/adam/tongji/sp_vision_25/build/sp_vision -- -j4 -l4
+[0.068s] [35m[1mConsolidate compiler generated dependencies of target tinympcstatic[0m
+[0.084s] [  4%] Built target tinympcstatic
+[0.095s] [35m[1mConsolidate compiler generated dependencies of target omniperception[0m
+[0.110s] [  6%] Built target omniperception
+[0.125s] [35m[1mConsolidate compiler generated dependencies of target tools[0m
+[0.145s] [ 16%] Built target tools
+[0.155s] [35m[1mConsolidate compiler generated dependencies of target serial[0m
+[0.166s] [ 20%] Built target serial
+[0.176s] [35m[1mConsolidate compiler generated dependencies of target calibrate_robotworld_handeye[0m
+[0.190s] [ 21%] Built target calibrate_robotworld_handeye
+[0.199s] [35m[1mConsolidate compiler generated dependencies of target split_video[0m
+[0.213s] [ 22%] Built target split_video
+[0.227s] [35m[1mConsolidate compiler generated dependencies of target io[0m
+[0.246s] [ 29%] Built target io
+[0.257s] [35m[1mConsolidate compiler generated dependencies of target calibrate_handeye[0m
+[0.270s] [ 31%] Built target calibrate_handeye
+[0.280s] [35m[1mConsolidate compiler generated dependencies of target capture[0m
+[0.293s] [ 33%] Built target capture
+[0.302s] [35m[1mConsolidate compiler generated dependencies of target camera_test[0m
+[0.317s] [ 35%] Built target camera_test
+[0.327s] [35m[1mConsolidate compiler generated dependencies of target cboard_test[0m
+[0.340s] [ 37%] Built target cboard_test
+[0.351s] [35m[1mConsolidate compiler generated dependencies of target fire_test[0m
+[0.365s] [ 39%] Built target fire_test
+[0.374s] [35m[1mConsolidate compiler generated dependencies of target gimbal_response_test[0m
+[0.388s] [ 41%] Built target gimbal_response_test
+[0.397s] [35m[1mConsolidate compiler generated dependencies of target multi_usbcamera_test[0m
+[0.411s] [ 43%] Built target multi_usbcamera_test
+[0.421s] [35m[1mConsolidate compiler generated dependencies of target usbcamera_test[0m
+[0.434s] [ 45%] Built target usbcamera_test
+[0.443s] [35m[1mConsolidate compiler generated dependencies of target dm_test[0m
+[0.456s] [ 46%] Built target dm_test
+[0.478s] [35m[1mConsolidate compiler generated dependencies of target auto_aim[0m
+[0.518s] [ 59%] Built target auto_aim
+[0.529s] [35m[1mConsolidate compiler generated dependencies of target calibrate_camera[0m
+[0.541s] [ 61%] Built target calibrate_camera
+[0.551s] [35m[1mConsolidate compiler generated dependencies of target auto_aim_test[0m
+[0.566s] [ 63%] Built target auto_aim_test
+[0.576s] [35m[1mConsolidate compiler generated dependencies of target camera_detect_test[0m
+[0.589s] [ 65%] Built target camera_detect_test
+[0.599s] [35m[1mConsolidate compiler generated dependencies of target camera_thread_test[0m
+[0.615s] [ 66%] Built target camera_thread_test
+[0.625s] [35m[1mConsolidate compiler generated dependencies of target detector_video_test[0m
+[0.640s] [ 68%] Built target detector_video_test
+[0.650s] [35m[1mConsolidate compiler generated dependencies of target usbcamera_detect_test[0m
+[0.664s] [ 70%] Built target usbcamera_detect_test
+[0.674s] [35m[1mConsolidate compiler generated dependencies of target handeye_test[0m
+[0.688s] [ 71%] Built target handeye_test
+[0.698s] [35m[1mConsolidate compiler generated dependencies of target minimum_vision_system[0m
+[0.714s] [ 73%] Built target minimum_vision_system
+[0.724s] [35m[1mConsolidate compiler generated dependencies of target gimbal_test[0m
+[0.738s] [ 75%] Built target gimbal_test
+[0.749s] [35m[1mConsolidate compiler generated dependencies of target planner_test[0m
+[0.762s] [ 76%] Built target planner_test
+[0.772s] [35m[1mConsolidate compiler generated dependencies of target planner_test_offline[0m
+[0.787s] [ 78%] Built target planner_test_offline
+[0.796s] [35m[1mConsolidate compiler generated dependencies of target uav_debug[0m
+[0.811s] [ 80%] Built target uav_debug
+[0.826s] [35m[1mConsolidate compiler generated dependencies of target auto_buff[0m
+[0.849s] [ 85%] Built target auto_buff
+[0.859s] [35m[1mConsolidate compiler generated dependencies of target standard[0m
+[0.874s] [ 87%] Built target standard
+[0.884s] [35m[1mConsolidate compiler generated dependencies of target auto_aim_debug_mpc[0m
+[0.899s] [ 89%] Built target auto_aim_debug_mpc
+[0.910s] [35m[1mConsolidate compiler generated dependencies of target mt_auto_aim_debug[0m
+[0.925s] [ 91%] Built target mt_auto_aim_debug
+[0.936s] [35m[1mConsolidate compiler generated dependencies of target auto_buff_debug[0m
+[0.953s] [ 93%] Built target auto_buff_debug
+[0.963s] [35m[1mConsolidate compiler generated dependencies of target auto_buff_debug_mpc[0m
+[0.979s] [ 94%] Built target auto_buff_debug_mpc
+[0.988s] [35m[1mConsolidate compiler generated dependencies of target uav[0m
+[1.004s] [ 95%] Built target uav
+[1.015s] [35m[1mConsolidate compiler generated dependencies of target auto_buff_test[0m
+[1.032s] [ 97%] Built target auto_buff_test
+[1.044s] [35m[1mConsolidate compiler generated dependencies of target standard_mpc[0m
+[1.060s] [ 99%] Built target standard_mpc
+[1.070s] [35m[1mConsolidate compiler generated dependencies of target mt_standard[0m
+[1.086s] [ 99%] [32mBuilding CXX object CMakeFiles/mt_standard.dir/src/mt_standard.cpp.o[0m
+[11.240s] [100%] [32m[1mLinking CXX executable mt_standard[0m
+[12.238s] [100%] Built target mt_standard
+[12.249s] Invoked command in '/home/adam/tongji/sp_vision_25/build/sp_vision' returned '0': /usr/bin/cmake --build /home/adam/tongji/sp_vision_25/build/sp_vision -- -j4 -l4

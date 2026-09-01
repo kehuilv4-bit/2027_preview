@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmake --build:*)",
+      "Bash(find:*)",
+      "Bash(./build/print_packet:*)",
+      "Bash(find . -type f \\\\\\(-name *.o -o -name *.a -o -name *.so -o -name *.exe -o -name *.out \\\\\\))",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}

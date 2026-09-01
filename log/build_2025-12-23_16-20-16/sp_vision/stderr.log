@@ -1,0 +1,34 @@
+[33mCMake Warning at io/CMakeLists.txt:49 (message):
+  ROS2 not found, skipping ROS2 specific code.
+
+[0m
+[01m[K/home/adam/tongji/sp_vision_25/tasks/auto_aim/planner/tinympc/admm.cpp:[m[K In function ‘[01m[KtinyVector project_soc(tinyVector, float)[m[K’:
+[01m[K/home/adam/tongji/sp_vision_25/tasks/auto_aim/planner/tinympc/admm.cpp:40:42:[m[K [01;35m[Kwarning: [m[K‘[01m[KEigen::placeholders::last[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+   40 |     tinytype u0 = s(Eigen::placeholders::[01;35m[Klast[m[K) * mu;
+      |                                          [01;35m[K^~~~[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:265[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Eigen:1[m[K,
+                 from [01m[K/home/adam/tongji/sp_vision_25/tasks/auto_aim/planner/tinympc/types.hpp:3[m[K,
+                 from [01m[K/home/adam/tongji/sp_vision_25/tasks/auto_aim/planner/tinympc/admm.hpp:3[m[K,
+                 from [01m[K/home/adam/tongji/sp_vision_25/tasks/auto_aim/planner/tinympc/admm.cpp:3[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/util/IndexedViewHelper.h:180:40:[m[K [01;36m[Knote: [m[Kdeclared here
+  180 |   EIGEN_DEPRECATED static const last_t [01;36m[Klast[m[K = Eigen::last;   // PLEASE use Eigen::last   instead of Eigen::placeholders::last
+      |                                        [01;36m[K^~~~[m[K
+[01m[K/home/adam/tongji/sp_vision_25/io/gimbal/gimbal.cpp:[m[K In member function ‘[01m[KEigen::Quaterniond io::Gimbal::q(std::chrono::_V2::steady_clock::time_point)[m[K’:
+[01m[K/home/adam/tongji/sp_vision_25/io/gimbal/gimbal.cpp:73:11:[m[K [01;31m[Kerror: [m[Kconflicting declaration ‘[01m[Kauto q_a[m[K’
+   73 |     auto [[01;31m[Kq_a[m[K, t_a] = queue_.pop();
+      |           [01;31m[K^~~[m[K
+[01m[K/home/adam/tongji/sp_vision_25/io/gimbal/gimbal.cpp:70:11:[m[K [01;36m[Knote: [m[Kprevious declaration as ‘[01m[Kstd::tuple_element<0, std::tuple<Eigen::Quaternion<double, 0>, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long int, std::ratio<1, 1000000000> > > > >::type&& q_a[m[K’
+   70 |     auto [[01;36m[Kq_a[m[K, t_a] = queue_.pop();
+      |           [01;36m[K^~~[m[K
+[01m[K/home/adam/tongji/sp_vision_25/io/gimbal/gimbal.cpp:73:16:[m[K [01;31m[Kerror: [m[Kconflicting declaration ‘[01m[Kauto t_a[m[K’
+   73 |     auto [q_a, [01;31m[Kt_a[m[K] = queue_.pop();
+      |                [01;31m[K^~~[m[K
+[01m[K/home/adam/tongji/sp_vision_25/io/gimbal/gimbal.cpp:70:16:[m[K [01;36m[Knote: [m[Kprevious declaration as ‘[01m[Kstd::tuple_element<0, std::tuple<std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long int, std::ratio<1, 1000000000> > > > >::type&& t_a[m[K’
+   70 |     auto [q_a, [01;36m[Kt_a[m[K] = queue_.pop();
+      |                [01;36m[K^~~[m[K
+gmake[2]: *** [io/CMakeFiles/io.dir/build.make:160：io/CMakeFiles/io.dir/gimbal/gimbal.cpp.o] 错误 1
+gmake[1]: *** [CMakeFiles/Makefile2:1233：io/CMakeFiles/io.dir/all] 错误 2
+gmake[1]: *** 正在等待未完成的任务....
+gmake: *** [Makefile:101：all] 错误 2
