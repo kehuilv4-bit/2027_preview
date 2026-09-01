@@ -1,10 +1,10 @@
 #include <fmt/core.h>
 
 #include <chrono>
-#include <fstream>
 #include <nlohmann/json.hpp>
 #include <opencv2/opencv.hpp>
 
+#include "io/camera.hpp"
 #include "tasks/auto_aim/aimer.hpp"
 #include "tasks/auto_aim/solver.hpp"
 #include "tasks/auto_aim/tracker.hpp"
@@ -17,10 +17,7 @@
 
 const std::string keys =
   "{help h usage ? |                   | 输出命令行参数说明 }"
-  "{config-path c  | configs/demo.yaml | yaml配置文件的路径}"
-  "{start-index s  | 0                 | 视频起始帧下标    }"
-  "{end-index e    | 0                 | 视频结束帧下标    }"
-  "{@input-path    | assets/demo/demo  | avi和txt文件的路径}";
+  "{config-path c  | configs/demo.yaml | yaml配置文件的路径}";
 
 int main(int argc, char * argv[])
 {
@@ -30,18 +27,12 @@ int main(int argc, char * argv[])
     cli.printMessage();
     return 0;
   }
-  auto input_path = cli.get<std::string>(0);
   auto config_path = cli.get<std::string>("config-path");
-  auto start_index = cli.get<int>("start-index");
-  auto end_index = cli.get<int>("end-index");
 
   tools::Plotter plotter;
   tools::Exiter exiter;
 
-  auto video_path = fmt::format("{}.avi", input_path);
-  auto text_path = fmt::format("{}.txt", input_path);
-  cv::VideoCapture video(video_path);
-  std::ifstream text(text_path);
+  io::Camera camera(config_path);
 
   auto_aim::YOLO yolo(config_path);
   auto_aim::Solver solver(config_path);
@@ -49,27 +40,21 @@ int main(int argc, char * argv[])
   auto_aim::Aimer aimer(config_path);
 
   cv::Mat img, drawing;
-  auto t0 = std::chrono::steady_clock::now();
 
   auto_aim::Target last_target;
   io::Command last_command;
   double last_t = -1;
 
-  video.set(cv::CAP_PROP_POS_FRAMES, start_index);
-  for (int i = 0; i < start_index; i++) {
-    double t, w, x, y, z;
-    text >> t >> w >> x >> y >> z;
-  }
-
-  for (int frame_count = start_index; !exiter.exit(); frame_count++) {
-    if (end_index > 0 && frame_count > end_index) break;
-
-    video.read(img);
+  std::chrono::steady_clock::time_point timestamp;
+  for (int frame_count = 0; !exiter.exit(); frame_count++) {
+    camera.read(img, timestamp);
     if (img.empty()) break;
 
-    double t, w, x, y, z;
-    text >> t >> w >> x >> y >> z;
-    auto timestamp = t0 + std::chrono::microseconds(int(t * 1e6));
+    Eigen::Quaterniond q{1, 0, 0, 0};
+    auto w = q.w();
+    auto x = q.x();
+    auto y = q.y();
+    auto z = q.z();
 
     /// 自瞄核心逻辑
 
@@ -127,7 +112,6 @@ int main(int argc, char * argv[])
       data["armor_center_y"] = armor.center_norm.y;
     }
 
-    Eigen::Quaternion q{w, x, y, z};
     auto yaw = tools::eulers(q, 2, 1, 0)[0];
     data["gimbal_yaw"] = yaw * 57.3;
     data["cmd_yaw"] = command.yaw * 57.3;
@@ -138,7 +122,7 @@ int main(int argc, char * argv[])
 
       if (last_t == -1) {
         last_target = target;
-        last_t = t;
+        last_t = 0;
         continue;
       }
 

@@ -90,6 +90,9 @@ max_pitch_acc: 100
 Q_pitch: [9e6,0]
 R_pitch: [1]
 
+v1: 200 #加速度方差
+v2: 350 #角速度方差 
+
 #####-----buff_detector参数-----#####
 detect:
   contrast: 1
