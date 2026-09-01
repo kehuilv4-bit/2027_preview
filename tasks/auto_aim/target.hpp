@@ -2,6 +2,7 @@
 #define AUTO_AIM__TARGET_HPP
 
 #include <Eigen/Dense>
+#include <array>
 #include <chrono>
 #include <optional>
 #include <queue>
@@ -52,6 +53,9 @@ private:
 
   bool is_switch_, is_converged_;
 
+  int outpost_rotation_direction_ = 0;  // 0: unknown, 1: CCW, -1: CW
+  std::array<bool, 3> outpost_height_initialized_{{true, false, false}};
+
   double v1_;  // 加速度方差
   double v2_;  // 角加速度方差
 
@@ -59,6 +63,11 @@ private:
   std::chrono::steady_clock::time_point t_;
 
   void update_ypda(const Armor & armor, int id);  // yaw pitch distance angle
+  void lock_outpost_rotation_direction();
+  void enforce_outpost_radius();
+  void initialize_outpost_height(const Armor & armor, int id);
+  void clamp_outpost_height_offsets();
+  double association_error(const Armor & armor, const Eigen::Vector4d & xyza, int id) const;
 
   Eigen::Vector3d h_armor_xyz(const Eigen::VectorXd & x, int id) const;
   Eigen::MatrixXd h_jacobian(const Eigen::VectorXd & x, int id) const;

@@ -1,8 +1,6 @@
 #ifndef AUTO_AIM__AIMER_HPP
 #define AUTO_AIM__AIMER_HPP
 
-#include <yaml-cpp/yaml.h>
-
 #include <Eigen/Dense>
 #include <chrono>
 #include <list>
@@ -33,9 +31,6 @@ public:
     std::list<Target> targets, std::chrono::steady_clock::time_point timestamp, double bullet_speed,
     io::ShootMode shoot_mode, bool to_now = true);
 
-  /// @brief 热重载偏置参数（从YAML节点）
-  void reload(const YAML::Node & yaml);
-
 private:
   double yaw_offset_;
   std::optional<double> left_yaw_offset_, right_yaw_offset_;
@@ -45,6 +40,7 @@ private:
   double lock_id_ = -1;
   double high_speed_delay_time_;
   double low_speed_delay_time_;
+  double outpost_delay_time_;
   double decision_speed_;
 
   AimPoint choose_aim_point(const Target & target);

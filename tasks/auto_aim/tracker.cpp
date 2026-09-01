@@ -24,8 +24,8 @@ Tracker::Tracker(const std::string & config_path, Solver & solver)
   max_temp_lost_count_ = yaml["max_temp_lost_count"].as<int>();
   outpost_max_temp_lost_count_ = yaml["outpost_max_temp_lost_count"].as<int>();
   normal_temp_lost_count_ = max_temp_lost_count_;
-  v1_ = yaml["v1"].as<double>();
-  v2_ = yaml["v2"].as<double>();
+  v1_ = yaml["v1"].IsDefined() ? yaml["v1"].as<double>() : 100.0;
+  v2_ = yaml["v2"].IsDefined() ? yaml["v2"].as<double>() : 400.0;
 }
 
 std::string Tracker::state() const { return state_; }
@@ -248,7 +248,8 @@ bool Tracker::set_target(std::list<Armor> & armors, std::chrono::steady_clock::t
   }
 
   else if (armor.name == ArmorName::outpost) {
-    Eigen::VectorXd P0_dig{{1, 64, 1, 64, 1, 81, 0.4, 100, 1e-4, 0, 0}};
+    // l/h are the two unknown armor height offsets relative to the first observed armor.
+    Eigen::VectorXd P0_dig{{1, 64, 1, 64, 1, 81, 0.4, 100, 0, 4e-2, 4e-2}};
     target_ = Target(armor, t, 0.2765, 3, P0_dig, v1_, v2_);
   }
 

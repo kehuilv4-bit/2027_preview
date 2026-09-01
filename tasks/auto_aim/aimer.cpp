@@ -3,7 +3,6 @@
 #include <yaml-cpp/yaml.h>
 
 #include <cmath>
-#include <filesystem>
 #include <vector>
 
 #include "tools/logger.hpp"
@@ -16,32 +15,19 @@ Aimer::Aimer(const std::string & config_path)
 : left_yaw_offset_(std::nullopt), right_yaw_offset_(std::nullopt)
 {
   auto yaml = YAML::LoadFile(config_path);
-  reload(yaml);
-  tools::logger()->info("[Aimer] Config loaded from: {}", std::filesystem::absolute(config_path).string());
-}
-
-void Aimer::reload(const YAML::Node & yaml)
-{
   yaw_offset_ = yaml["yaw_offset"].as<double>() / 57.3;        // degree to rad
   pitch_offset_ = yaml["pitch_offset"].as<double>() / 57.3;    // degree to rad
   comming_angle_ = yaml["comming_angle"].as<double>() / 57.3;  // degree to rad
   leaving_angle_ = yaml["leaving_angle"].as<double>() / 57.3;  // degree to rad
   high_speed_delay_time_ = yaml["high_speed_delay_time"].as<double>();
   low_speed_delay_time_ = yaml["low_speed_delay_time"].as<double>();
+  outpost_delay_time_ =
+    yaml["outpost_delay_time"].IsDefined() ? yaml["outpost_delay_time"].as<double>() : 0.3;
   decision_speed_ = yaml["decision_speed"].as<double>();
   if (yaml["left_yaw_offset"].IsDefined() && yaml["right_yaw_offset"].IsDefined()) {
     left_yaw_offset_ = yaml["left_yaw_offset"].as<double>() / 57.3;    // degree to rad
     right_yaw_offset_ = yaml["right_yaw_offset"].as<double>() / 57.3;  // degree to rad
-  }
-  tools::logger()->info(
-    "[Aimer] yaw_offset={:.2f}deg pitch_offset={:.2f}deg comming_angle={:.1f}deg "
-    "leaving_angle={:.1f}deg decision_speed={:.2f}rad/s",
-    yaw_offset_ * 57.3, pitch_offset_ * 57.3, comming_angle_ * 57.3,
-    leaving_angle_ * 57.3, decision_speed_);
-  if (left_yaw_offset_.has_value()) {
-    tools::logger()->info(
-      "[Aimer] left_yaw_offset={:.2f}deg right_yaw_offset={:.2f}deg",
-      left_yaw_offset_.value() * 57.3, right_yaw_offset_.value() * 57.3);
+    tools::logger()->info("[Aimer] successfully loading shootmode");
   }
 }
 
@@ -53,8 +39,13 @@ io::Command Aimer::aim(
   auto target = targets.front();
 
   auto ekf = target.ekf();
-  double delay_time =
-    target.ekf_x()[7] > decision_speed_ ? high_speed_delay_time_ : low_speed_delay_time_;
+  double delay_time;
+  if (target.name == ArmorName::outpost) {
+    delay_time = outpost_delay_time_;
+  } else {
+    delay_time =
+      target.ekf_x()[7] > decision_speed_ ? high_speed_delay_time_ : low_speed_delay_time_;
+  }
 
   if (bullet_speed < 14) bullet_speed = 23;
 
