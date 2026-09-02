@@ -71,7 +71,7 @@ Target::Target(
 }
 
 Target::Target(double x, double vyaw, double radius, double h)
-: armor_num_(4), outpost_rotation_direction_(0)
+: armor_num_(4), outpost_rotation_direction_(0)//初始化状态
 {
   Eigen::VectorXd x0{{x, 0, 0, 0, 0, 0, 0, vyaw, radius, 0, h}};
   Eigen::VectorXd P0_dig{{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
@@ -118,7 +118,7 @@ void Target::predict(double dt)
   double v1 = v1_, v2 = v2_;
   if (name == ArmorName::outpost) {
     v1 = 10;  // 前哨站加速度方差
-    v2 = (outpost_rotation_direction_ == 0) ? 200 : 0.0;
+    v2 = (outpost_rotation_direction_ == 0) ? 200 : 0.1;
   }
 
   auto a = dt * dt * dt * dt / 4;
