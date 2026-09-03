@@ -104,6 +104,7 @@ int main(int argc, char * argv[])
     data["armor_num"] = armors.size();
     if (!armors.empty()) {
       const auto & armor = armors.front();
+      tools::logger()->debug("armor yaw: {:.2f} deg", armor.ypr_in_world[0] * 57.3);
       data["armor_x"] = armor.xyz_in_world[0];
       data["armor_y"] = armor.xyz_in_world[1];
       data["armor_yaw"] = armor.ypr_in_world[0] * 57.3;
