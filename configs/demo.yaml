@@ -7,8 +7,11 @@ classify_model: assets/tiny_resnet.onnx
 yolo11_model_path: assets/yolo11.xml
 yolov8_model_path: assets/yolov8.xml
 yolov5_model_path: assets/yolov5.xml
-device: CPU
-min_confidence: 0.8
+# Select "original" to keep the existing model, or "yolov5n" for the new nano model.
+yolov5_variant: yolov5n
+yolov5n_model_path: assets/Infantry-v5n-20250725.xml
+device: GPU
+min_confidence: 0.7
 use_traditional: true
 
 #####-----ROI-----#####
@@ -30,7 +33,7 @@ min_armor_ratio: 1
 max_armor_ratio: 5
 max_side_ratio: 1.5
 max_rectangular_error: 25 # degree
-min_confidence: 0.8
+min_confidence: 0.7
 
 #####-----tracker参数-----#####
 min_detect_count: 5
@@ -53,7 +56,7 @@ judge_distance: 2 #距离判断阈值
 auto_fire: true # 是否由自瞄控制射击
 
 camera_name: "hikrobot"
-exposure_ms: 2
+exposure_ms: 19
 gain: 16
 vid_pid: "2bdf:0001"
 
@@ -63,9 +66,8 @@ vid_pid: "2bdf:0001"
 R_gimbal2imubody: [-1, 0, 0, 0, -1, 0, 0, 0, 1]
 
 # 重投影误差: 0.0437px
-camera_matrix: [1715.2764386676888, 0, 702.11298092849472, 0, 1716.226874138019, 572.60295706646139, 0, 0, 1]
-distort_coeffs: [-0.070656137386033463, 0.082647973320938317, 0.0020020288498755587, -0.00082914168198214343, 0]
-
+camera_matrix: [1924.14723305, 0.00000000, 640.62347781, 0.00000000, 1922.99959880, 531.93610299, 0.00000000, 0.00000000, 1.00000000]
+distort_coeffs: [0.00335128, 0.50543571, 0.00000000, 0.00000000, 0.00000000]
 # 相机同理想情况的偏角: yaw-1.04 pitch-0.71 roll-0.17 degree
 R_camera2gimbal: [0, 0, 1, -1, 0, 0, 0, -1, 0]
 t_camera2gimbal: [0.11994017, 0.0, 0.16147]

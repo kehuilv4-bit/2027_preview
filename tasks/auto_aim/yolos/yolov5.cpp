@@ -15,7 +15,18 @@ YOLOV5::YOLOV5(const std::string & config_path, bool debug)
 {
   auto yaml = YAML::LoadFile(config_path);
 
-  model_path_ = yaml["yolov5_model_path"].as<std::string>();
+  // Keep the original model as the default; the nano model is opt-in.
+  auto variant = yaml["yolov5_variant"] ? yaml["yolov5_variant"].as<std::string>() : "original";
+  if (variant == "yolov5n") {
+    if (!yaml["yolov5n_model_path"]) {
+      throw std::runtime_error("yolov5_variant is yolov5n but yolov5n_model_path is missing");
+    }
+    model_path_ = yaml["yolov5n_model_path"].as<std::string>();
+  } else if (variant == "original") {
+    model_path_ = yaml["yolov5_model_path"].as<std::string>();
+  } else {
+    throw std::runtime_error("Unknown yolov5_variant: " + variant);
+  }
   device_ = yaml["device"].as<std::string>();
   binary_threshold_ = yaml["threshold"].as<double>();
   min_confidence_ = yaml["min_confidence"].as<double>();
@@ -52,6 +63,7 @@ YOLOV5::YOLOV5(const std::string & config_path, bool debug)
   model = ppp.build();
   compiled_model_ = core_.compile_model(
     model, device_, ov::hint::performance_mode(ov::hint::PerformanceMode::LATENCY));
+  infer_request_ = compiled_model_.create_infer_request();
 }
 
 std::list<Armor> YOLOV5::detect(const cv::Mat & raw_img, int frame_count)
@@ -87,12 +99,11 @@ std::list<Armor> YOLOV5::detect(const cv::Mat & raw_img, int frame_count)
   ov::Tensor input_tensor(ov::element::u8, {1, 640, 640, 3}, input.data);
 
   // infer
-  auto infer_request = compiled_model_.create_infer_request();
-  infer_request.set_input_tensor(input_tensor);
-  infer_request.infer();
+  infer_request_.set_input_tensor(input_tensor);
+  infer_request_.infer();
 
   // postprocess
-  auto output_tensor = infer_request.get_output_tensor();
+  auto output_tensor = infer_request_.get_output_tensor();
   auto output_shape = output_tensor.get_shape();
   cv::Mat output(output_shape[1], output_shape[2], CV_32F, output_tensor.data());
 
