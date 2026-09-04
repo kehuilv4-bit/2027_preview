@@ -8,6 +8,8 @@ classify_model: assets/tiny_resnet.onnx
 yolo11_model_path: assets/yolo11.xml
 yolov8_model_path: assets/yolov8.xml
 yolov5_model_path: assets/yolov5.xml
+yolov5n_model_path: assets/Infantry-v5n-Release-20260725.xml
+yolov5_variant: yolov5n # original是原先的v5模型，yolov5n是2026深圳大学开源
 device: GPU
 min_confidence: 0.8
 use_traditional: true
@@ -76,6 +78,7 @@ right_yaw_offset: 1
 decision_speed: 1.5 # rad/s 决策速度阈值
 high_speed_delay_time: 0.032
 low_speed_delay_time: 0.03  # s
+outpost_delay_time: 0.3 # s 前哨站延迟
 
 #####-----shooter参数-----#####
 first_tolerance: 2.2 # 近距离射击容差，degree

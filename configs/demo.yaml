@@ -7,9 +7,9 @@ classify_model: assets/tiny_resnet.onnx
 yolo11_model_path: assets/yolo11.xml
 yolov8_model_path: assets/yolov8.xml
 yolov5_model_path: assets/yolov5.xml
-# Select "original" to keep the existing model, or "yolov5n" for the new nano model.
-yolov5_variant: yolov5n
 yolov5n_model_path: assets/Infantry-v5n-Release-20260725.xml
+yolov5_variant: yolov5n # original是原先的v5模型，yolov5n是2026深圳大学开源
+yolov5_variant: yolov5n
 device: GPU
 min_confidence: 0.7
 use_traditional: true
