@@ -238,21 +238,13 @@ bool Tracker::set_target(std::list<Armor> & armors, std::chrono::steady_clock::t
   solver_.solve(armor);
 
   // 根据兵种优化初始化参数
-  auto is_balance = (armor.type == ArmorType::big) &&
-                    (armor.name == ArmorName::three || armor.name == ArmorName::four ||
-                     armor.name == ArmorName::five);
-
-  if (is_balance) {
-    Eigen::VectorXd P0_dig{{1, 64, 1, 64, 1, 64, 0.4, 100, 1, 1, 1}};
-    target_ = Target(armor, t, 0.2, 2, P0_dig, v1_, v2_);
-  }
-
-  else if (armor.name == ArmorName::outpost) {
+  
+  if (armor.name == ArmorName::outpost) {
     // l/h are the two unknown armor height offsets relative to the first observed armor.
     Eigen::VectorXd P0_dig{{1, 64, 1, 64, 1, 81, 0.4, 100, 0, 4e-2, 4e-2}};
     target_ = Target(armor, t, 0.2765, 3, P0_dig, v1_, v2_);
   }
-
+  //基地
   else if (armor.name == ArmorName::base) {
     Eigen::VectorXd P0_dig{{1, 64, 1, 64, 1, 64, 0.4, 100, 1e-4, 0, 0}};
     target_ = Target(armor, t, 0.3205, 3, P0_dig, v1_, v2_);
