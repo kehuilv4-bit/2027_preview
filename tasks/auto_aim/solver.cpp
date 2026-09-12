@@ -60,7 +60,7 @@ void Solver::solve(Armor & armor) const
   cv::Vec3d rvec, tvec;
   cv::solvePnP(
     object_points, armor.points, camera_matrix_, distort_coeffs_, rvec, tvec, false,
-  cv::SOLVEPNP_IPPE);  // cv::SOLVEPNP_ITERATIVE感觉效果也不错
+  cv::SOLVEPNP_ITERATIVE);  // cv::SOLVEPNP_ITERATIVE感觉效果也不错  cv::SOLVEPNP_IPPE 
 
   Eigen::Vector3d xyz_in_camera;
   cv::cv2eigen(tvec, xyz_in_camera);
@@ -77,12 +77,6 @@ void Solver::solve(Armor & armor) const
   armor.ypr_in_world = tools::eulers(R_armor2world, 2, 1, 0);
 
   armor.ypd_in_world = tools::xyz2ypd(armor.xyz_in_world);
-
-  // 平衡不做yaw优化，因为pitch假设不成立
-  auto is_balance = (armor.type == ArmorType::big) &&
-                    (armor.name == ArmorName::three || armor.name == ArmorName::four ||
-                     armor.name == ArmorName::five);
-  if (is_balance) return;
 
   optimize_yaw(armor);
 }
@@ -203,7 +197,7 @@ void Solver::optimize_yaw(Armor & armor) const
   auto min_error = 1e10;
   auto best_yaw = armor.ypr_in_world[0];
 //搜索角度变小但是搜索步长变小
-  for (double i = 0; i < SEARCH_RANGE; i +=0.2) {
+  for (double i = 0; i < SEARCH_RANGE; i +=0.5) {
     double yaw = tools::limit_rad(yaw0 + i * CV_PI / 180.0);
     auto error = armor_reprojection_error(armor, yaw, (i - SEARCH_RANGE / 2) * CV_PI / 180.0);
 
