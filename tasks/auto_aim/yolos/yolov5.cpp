@@ -3,6 +3,8 @@
 #include <fmt/chrono.h>
 #include <yaml-cpp/yaml.h>
 
+#include <algorithm>
+#include <cmath>
 #include <filesystem>
 
 #include "tools/img_tools.hpp"
@@ -89,12 +91,15 @@ std::list<Armor> YOLOV5::detect(const cv::Mat & raw_img, int frame_count)
   auto x_scale = static_cast<double>(640) / bgr_img.rows;
   auto y_scale = static_cast<double>(640) / bgr_img.cols;
   auto scale = std::min(x_scale, y_scale);
-  auto h = static_cast<int>(bgr_img.rows * scale);
-  auto w = static_cast<int>(bgr_img.cols * scale);
+  auto h = std::min(640, static_cast<int>(std::round(bgr_img.rows * scale)));
+  auto w = std::min(640, static_cast<int>(std::round(bgr_img.cols * scale)));
+  pad_x_ = (640 - w) / 2;
+  pad_y_ = (640 - h) / 2;
+  inference_image_size_ = bgr_img.size();
 
-  // preproces
-  auto input = cv::Mat(640, 640, CV_8UC3, cv::Scalar(0, 0, 0));
-  auto roi = cv::Rect(0, 0, w, h);
+  // Infantry-v5n uses centered letterbox preprocessing with a gray border.
+  auto input = cv::Mat(640, 640, CV_8UC3, cv::Scalar(124, 124, 124));
+  auto roi = cv::Rect(pad_x_, pad_y_, w, h);
   cv::resize(bgr_img, input(roi), {w, h});
   ov::Tensor input_tensor(ov::element::u8, {1, 640, 640, 3}, input.data);
 
@@ -105,6 +110,11 @@ std::list<Armor> YOLOV5::detect(const cv::Mat & raw_img, int frame_count)
   // postprocess
   auto output_tensor = infer_request_.get_output_tensor();
   auto output_shape = output_tensor.get_shape();
+  if (output_shape.size() != 3 || output_shape[0] != 1 || output_shape[1] != 25200 ||
+      output_shape[2] != 22) {
+    tools::logger()->error("Unexpected YOLOv5 output shape");
+    return {};
+  }
   cv::Mat output(output_shape[1], output_shape[2], CV_32F, output_tensor.data());
 
   return parse(scale, output, raw_img, frame_count);
@@ -113,56 +123,74 @@ std::list<Armor> YOLOV5::detect(const cv::Mat & raw_img, int frame_count)
 std::list<Armor> YOLOV5::parse(
   double scale, cv::Mat & output, const cv::Mat & bgr_img, int frame_count)
 {
-  // for each row: xywh + classess
+  if (output.empty() || output.rows != 25200 ||
+      output.cols != 8 + 1 + color_num_ + class_num_) {
+    tools::logger()->error(
+      "Unexpected YOLOv5 output matrix shape: {}x{}", output.rows, output.cols);
+    return {};
+  }
+
+  if (scale <= 0.0 || inference_image_size_.width <= 0 ||
+      inference_image_size_.height <= 0) {
+    tools::logger()->error("Invalid YOLOv5 postprocess parameters");
+    return {};
+  }
+
+  // The model emits LT, LB, RB, RT. Armor expects LT, RT, RB, LB.
   std::vector<int> color_ids, num_ids;
   std::vector<float> confidences;
   std::vector<cv::Rect> boxes;
   std::vector<std::vector<cv::Point2f>> armors_key_points;
+
+  // Column 8 is a raw objectness logit. Color and class columns are already
+  // sigmoid outputs in Infantry-v5n.
+  const double raw_score_threshold =
+    std::log(static_cast<double>(score_threshold_) / (1.0 - score_threshold_));
+
   for (int r = 0; r < output.rows; r++) {
-    double score = output.at<float>(r, 8);
-    score = sigmoid(score);
+    const double raw_score = output.at<float>(r, 8);
+    if (raw_score < raw_score_threshold) continue;
+    const float score = static_cast<float>(sigmoid(raw_score));
 
-    if (score < score_threshold_) continue;
-
-    std::vector<cv::Point2f> armor_key_points;
-
-    //颜色和类别独热向量
-    cv::Mat color_scores = output.row(r).colRange(9, 13);     //color
-    cv::Mat classes_scores = output.row(r).colRange(13, 22);  //num
-    cv::Point class_id, color_id;
-    int _class_id, _color_id;
-    double score_color, score_num;
-    cv::minMaxLoc(classes_scores, NULL, &score_num, NULL, &class_id);
-    cv::minMaxLoc(color_scores, NULL, &score_color, NULL, &color_id);
-    _class_id = class_id.x;
-    _color_id = color_id.x;
-
-    armor_key_points.push_back(
-      cv::Point2f(output.at<float>(r, 0) / scale, output.at<float>(r, 1) / scale));
-    armor_key_points.push_back(
-      cv::Point2f(output.at<float>(r, 6) / scale, output.at<float>(r, 7) / scale));
-    armor_key_points.push_back(
-      cv::Point2f(output.at<float>(r, 4) / scale, output.at<float>(r, 5) / scale));
-    armor_key_points.push_back(
-      cv::Point2f(output.at<float>(r, 2) / scale, output.at<float>(r, 3) / scale));
-
-    float min_x = armor_key_points[0].x;
-    float max_x = armor_key_points[0].x;
-    float min_y = armor_key_points[0].y;
-    float max_y = armor_key_points[0].y;
-
-    for (int i = 1; i < armor_key_points.size(); i++) {
-      if (armor_key_points[i].x < min_x) min_x = armor_key_points[i].x;
-      if (armor_key_points[i].x > max_x) max_x = armor_key_points[i].x;
-      if (armor_key_points[i].y < min_y) min_y = armor_key_points[i].y;
-      if (armor_key_points[i].y > max_y) max_y = armor_key_points[i].y;
+    int color_id = 0;
+    for (int i = 1; i < color_num_; ++i) {
+      if (output.at<float>(r, 9 + i) > output.at<float>(r, 9 + color_id)) {
+        color_id = i;
+      }
     }
 
-    cv::Rect rect(min_x, min_y, max_x - min_x, max_y - min_y);
+    int class_id = 0;
+    for (int i = 1; i < class_num_; ++i) {
+      if (output.at<float>(r, 13 + i) > output.at<float>(r, 13 + class_id)) {
+        class_id = i;
+      }
+    }
 
-    color_ids.emplace_back(_color_id);
-    num_ids.emplace_back(_class_id);
-    boxes.emplace_back(rect);
+    if (color_id == 3) continue;  // Ignore purple armor.
+
+    auto decode_point = [&](int point_index) {
+      const float x =
+        static_cast<float>((output.at<float>(r, point_index * 2) - pad_x_) / scale);
+      const float y =
+        static_cast<float>((output.at<float>(r, point_index * 2 + 1) - pad_y_) / scale);
+      return cv::Point2f(x, y);
+    };
+
+    const std::vector<cv::Point2f> model_key_points = {
+      decode_point(0), decode_point(1), decode_point(2), decode_point(3)};
+    const std::vector<cv::Point2f> armor_key_points = {
+      model_key_points[0], model_key_points[3], model_key_points[2], model_key_points[1]};
+
+    if (std::any_of(
+          armor_key_points.begin(), armor_key_points.end(), [](const cv::Point2f & point) {
+            return !std::isfinite(point.x) || !std::isfinite(point.y);
+          })) {
+      continue;
+    }
+
+    color_ids.emplace_back(color_id);
+    num_ids.emplace_back(class_id);
+    boxes.emplace_back(cv::boundingRect(armor_key_points));
     confidences.emplace_back(score);
     armors_key_points.emplace_back(armor_key_points);
   }
@@ -172,6 +200,14 @@ std::list<Armor> YOLOV5::parse(
 
   std::list<Armor> armors;
   for (const auto & i : indices) {
+    const auto & points = armors_key_points[i];
+    const bool points_in_image = std::all_of(
+      points.begin(), points.end(), [this](const cv::Point2f & point) {
+        return point.x >= 0.0F && point.x <= inference_image_size_.width &&
+               point.y >= 0.0F && point.y <= inference_image_size_.height;
+      });
+    if (!points_in_image) continue;
+
     if (use_roi_) {
       armors.emplace_back(
         color_ids[i], num_ids[i], confidences[i], boxes[i], armors_key_points[i], offset_);
@@ -273,6 +309,13 @@ double YOLOV5::sigmoid(double x)
 std::list<Armor> YOLOV5::postprocess(
   double scale, cv::Mat & output, const cv::Mat & bgr_img, int frame_count)
 {
+  // MultiThreadDetector calls this entry point directly, so reconstruct the
+  // same letterbox parameters used by detect().
+  inference_image_size_ = bgr_img.size();
+  const auto h = std::min(640, static_cast<int>(std::round(bgr_img.rows * scale)));
+  const auto w = std::min(640, static_cast<int>(std::round(bgr_img.cols * scale)));
+  pad_x_ = (640 - w) / 2;
+  pad_y_ = (640 - h) / 2;
   return parse(scale, output, bgr_img, frame_count);
 }
 

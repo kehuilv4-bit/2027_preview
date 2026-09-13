@@ -28,9 +28,10 @@ private:
   std::string save_path_, debug_path_;
   bool debug_, use_roi_, use_traditional_;
 
-  const int class_num_ = 13;
-  const float nms_threshold_ = 0.3;
-  const float score_threshold_ = 0.7;
+  const int class_num_ = 9;
+  const int color_num_ = 4;
+  const float nms_threshold_ = 0.2;
+  const float score_threshold_ = 0.5;
   double min_confidence_, binary_threshold_;
 
   ov::Core core_;
@@ -40,6 +41,9 @@ private:
   cv::Rect roi_;
   cv::Point2f offset_;
   cv::Mat tmp_img_;
+  cv::Size inference_image_size_;
+  int pad_x_ = 0;
+  int pad_y_ = 0;
 
   Detector detector_;
   friend class MultiThreadDetector;

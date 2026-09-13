@@ -2,6 +2,9 @@
 
 #include <yaml-cpp/yaml.h>
 
+#include <algorithm>
+#include <cmath>
+
 namespace auto_aim
 {
 namespace multithread
@@ -12,7 +15,12 @@ MultiThreadDetector::MultiThreadDetector(const std::string & config_path, bool d
 {
   auto yaml = YAML::LoadFile(config_path);
   auto yolo_name = yaml["yolo_name"].as<std::string>();
-  auto model_path = yaml[yolo_name + "_model_path"].as<std::string>();
+  auto variant = yaml["yolov5_variant"] ? yaml["yolov5_variant"].as<std::string>() : "original";
+  auto model_key = yolo_name + "_model_path";
+  if (yolo_name == "yolov5" && variant == "yolov5n") {
+    model_key = "yolov5n_model_path";
+  }
+  auto model_path = yaml[model_key].as<std::string>();
   device_ = yaml["device"].as<std::string>();
 
   auto model = core_.read_model(model_path);
@@ -45,12 +53,12 @@ void MultiThreadDetector::push(cv::Mat img, std::chrono::steady_clock::time_poin
   auto x_scale = static_cast<double>(640) / img.rows;
   auto y_scale = static_cast<double>(640) / img.cols;
   auto scale = std::min(x_scale, y_scale);
-  auto h = static_cast<int>(img.rows * scale);
-  auto w = static_cast<int>(img.cols * scale);
+  auto h = std::min(640, static_cast<int>(std::round(img.rows * scale)));
+  auto w = std::min(640, static_cast<int>(std::round(img.cols * scale)));
 
-  // preproces
-  auto input = cv::Mat(640, 640, CV_8UC3, cv::Scalar(0, 0, 0));
-  auto roi = cv::Rect(0, 0, w, h);
+  // Keep multi-threaded inference consistent with Infantry-v5n letterbox.
+  auto input = cv::Mat(640, 640, CV_8UC3, cv::Scalar(124, 124, 124));
+  auto roi = cv::Rect((640 - w) / 2, (640 - h) / 2, w, h);
   cv::resize(img, input(roi), {w, h});
 
   auto input_port = compiled_model_.input();

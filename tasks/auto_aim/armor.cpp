@@ -6,6 +6,30 @@
 
 namespace auto_aim
 {
+namespace
+{
+ArmorName armor_name_from_v5_class(int num_id)
+{
+  switch (num_id) {
+    case 0:
+      return ArmorName::sentry;
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+      return ArmorName(num_id - 1);
+    case 6:
+      return ArmorName::outpost;
+    case 7:
+    case 8:
+      return ArmorName::base;
+    default:
+      return ArmorName::not_armor;
+  }
+}
+}  // namespace
+
 Lightbar::Lightbar(const cv::RotatedRect & rotated_rect, std::size_t id)
 : id(id), rotated_rect(rotated_rect)
 {
@@ -173,9 +197,7 @@ Armor::Armor(
 
   ratio = max_length / max_width;
   color = color_id == 0 ? Color::blue : color_id == 1 ? Color::red : Color::extinguish;
-  name = num_id == 0  ? ArmorName::sentry
-         : num_id > 5 ? ArmorName(num_id)
-                      : ArmorName(num_id - 1);  //TODO 考虑Bb
+  name = armor_name_from_v5_class(num_id);
   type = num_id == 1 ? ArmorType::big : ArmorType::small;
 }
 
@@ -214,7 +236,7 @@ Armor::Armor(
 
   ratio = max_length / max_width;
   color = color_id == 0 ? Color::blue : color_id == 1 ? Color::red : Color::extinguish;
-  name = num_id == 0 ? ArmorName::sentry : num_id > 5 ? ArmorName(num_id) : ArmorName(num_id - 1);
+  name = armor_name_from_v5_class(num_id);
   type = num_id == 1 ? ArmorType::big : ArmorType::small;
 }
 
