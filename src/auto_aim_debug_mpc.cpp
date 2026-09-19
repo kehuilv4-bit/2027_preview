@@ -18,6 +18,7 @@
 #include "tools/math_tools.hpp"
 #include "tools/plotter.hpp"
 #include "tools/thread_safe_queue.hpp"
+#include "tools/yaml.hpp"
 
 using namespace std::chrono_literals;
 
@@ -36,6 +37,8 @@ int main(int argc, char * argv[])
     cli.printMessage();
     return 0;
   }
+  auto yaml = YAML::LoadFile(config_path);
+  auto use_debug = yaml["debug"].as<bool>();
 
   io::Gimbal gimbal(config_path);
   io::Camera camera(config_path);
@@ -118,8 +121,10 @@ int main(int argc, char * argv[])
       target_queue.push(targets.front());
     else
       target_queue.push(std::nullopt);
-
-    if (!targets.empty()) {
+    
+    if(use_debug)
+    {
+      if (!targets.empty()) {
       auto target = targets.front();
 
       // 当前帧target更新后
@@ -134,10 +139,11 @@ int main(int argc, char * argv[])
       auto image_points =
         solver.reproject_armor(aim_xyza.head(3), aim_xyza[3], target.armor_type, target.name);
       tools::draw_points(img, image_points, {0, 0, 255});
-    }
+      }
 
     cv::resize(img, img, {}, 0.5, 0.5);  // 显示时缩小图片尺寸
     cv::imshow("reprojection", img);
+    }
     auto key = cv::waitKey(1);
     if (key == 'q') break;
 

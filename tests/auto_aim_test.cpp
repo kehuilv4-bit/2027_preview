@@ -14,6 +14,7 @@
 #include "tools/logger.hpp"
 #include "tools/math_tools.hpp"
 #include "tools/plotter.hpp"
+#include "tools/yaml.hpp"
 
 const std::string keys =
   "{help h usage ? |                   | 输出命令行参数说明 }"
@@ -28,6 +29,9 @@ int main(int argc, char * argv[])
     return 0;
   }
   auto config_path = cli.get<std::string>("config-path");
+
+  auto yaml = YAML::LoadFile(config_path);
+  auto debug = yaml["debug"].as<bool>();
 
   tools::Plotter plotter;
   tools::Exiter exiter;
@@ -173,9 +177,12 @@ int main(int argc, char * argv[])
 
     plotter.plot(data);
 
-    cv::resize(img, img, {}, 0.5, 0.5);  // 显示时缩小图片尺寸
-    cv::imshow("reprojection", img);
-    auto key = cv::waitKey(30);
+    if(debug)
+    {
+      cv::resize(img, img, {}, 0.5, 0.5);  // 显示时缩小图片尺寸
+      cv::imshow("reprojection", img);
+    }
+    auto key = cv::waitKey(1);
     if (key == 'q') break;
   }
 
