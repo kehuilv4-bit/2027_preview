@@ -119,7 +119,10 @@ int main(int argc, char * argv[])
 
     auto yaw = tools::eulers(q, 2, 1, 0)[0];
     data["gimbal_yaw"] = yaw * 57.3;
+    // 解算出的下发给下位机的 yaw/pitch（度）
     data["cmd_yaw"] = command.yaw * 57.3;
+    data["cmd_pitch"] = command.pitch * 57.3;
+    data["cmd_control"] = command.control;
     data["shoot"] = command.shoot;
 
     if (!targets.empty()) {
