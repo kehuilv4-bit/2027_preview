@@ -30,10 +30,12 @@ void Planner::reload(const YAML::Node & yaml)
   decision_speed_ = tools::read<double>(yaml, "decision_speed");
   high_speed_delay_time_ = tools::read<double>(yaml, "high_speed_delay_time");
   low_speed_delay_time_ = tools::read<double>(yaml, "low_speed_delay_time");
+  outpost_delay_time_ =
+    yaml["outpost_delay_time"].IsDefined() ? yaml["outpost_delay_time"].as<double>() : 0.3;
   tools::logger()->info(
     "[Planner] yaw_offset={:.2f}deg pitch_offset={:.2f}deg fire_thresh={:.4f} "
-    "decision_speed={:.2f}rad/s",
-    yaw_offset_ * 57.3, pitch_offset_ * 57.3, fire_thresh_, decision_speed_);
+    "decision_speed={:.2f}rad/s outpost_delay_time={:.3f}s",
+    yaw_offset_ * 57.3, pitch_offset_ * 57.3, fire_thresh_, decision_speed_, outpost_delay_time_);
 }
 
 Plan Planner::plan(Target target, double bullet_speed)
@@ -109,8 +111,14 @@ Plan Planner::plan(std::optional<Target> target, double bullet_speed)
 {
   if (!target.has_value()) return {false};
 
-  double delay_time =
-    std::abs(target->ekf_x()[7]) > decision_speed_ ? high_speed_delay_time_ : low_speed_delay_time_;
+  double delay_time;
+  if (target->name == ArmorName::outpost) {
+    delay_time = outpost_delay_time_;
+  } else {
+    delay_time =
+      std::abs(target->ekf_x()[7]) > decision_speed_ ? high_speed_delay_time_
+                                                     : low_speed_delay_time_;
+  }
 
   auto future = std::chrono::steady_clock::now() + std::chrono::microseconds(int(delay_time * 1e6));
 
