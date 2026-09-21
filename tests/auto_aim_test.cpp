@@ -3,9 +3,11 @@
 #include <chrono>
 #include <nlohmann/json.hpp>
 #include <opencv2/opencv.hpp>
+#include <optional>
 
 #include "io/camera.hpp"
 #include "tasks/auto_aim/aimer.hpp"
+#include "tasks/auto_aim/planner/planner.hpp"
 #include "tasks/auto_aim/solver.hpp"
 #include "tasks/auto_aim/tracker.hpp"
 #include "tasks/auto_aim/yolo.hpp"
@@ -19,6 +21,10 @@
 const std::string keys =
   "{help h usage ? |                   | 输出命令行参数说明 }"
   "{config-path c  | configs/demo.yaml | yaml配置文件的路径}";
+
+// 两条流水线共用同一弹速，否则 pitch 无法对比。
+// 注意 Planner 内部会把 <10 或 >25 夹成 22（planner.cpp:41），所以这里不能填 27
+constexpr double kBulletSpeed = 24.0;
 
 int main(int argc, char * argv[])
 {
@@ -42,6 +48,7 @@ int main(int argc, char * argv[])
   auto_aim::Solver solver(config_path);
   auto_aim::Tracker tracker(config_path, solver);
   auto_aim::Aimer aimer(config_path);
+  auto_aim::Planner planner(config_path);
 
   cv::Mat img, drawing;
 
@@ -70,8 +77,9 @@ int main(int argc, char * argv[])
     auto tracker_start = std::chrono::steady_clock::now();
     auto targets = tracker.track(armors, timestamp);
 
+    /// 传统流水线：Aimer
     auto aimer_start = std::chrono::steady_clock::now();
-    auto command = aimer.aim(targets, timestamp, 27, false);
+    auto command = aimer.aim(targets, timestamp, kBulletSpeed, false);
 
     if (
       !targets.empty() && aimer.debug_aim_point.valid &&
@@ -79,14 +87,23 @@ int main(int argc, char * argv[])
       command.shoot = true;
 
     if (command.control) last_command = command;
+
+    /// MPC 流水线：Planner
+    // 必须显式传 optional<Target>：直接传 targets.front() 会匹配到
+    // plan(Target, double) 那个重载，那条路径不做 delay_time 预测
+    auto planner_start = std::chrono::steady_clock::now();
+    std::optional<auto_aim::Target> target_opt;
+    if (!targets.empty()) target_opt = targets.front();
+    auto plan = planner.plan(target_opt, kBulletSpeed);
     /// 调试输出
 
     auto finish = std::chrono::steady_clock::now();
     tools::logger()->info(
-      "[{}] yolo: {:.1f}ms, tracker: {:.1f}ms, aimer: {:.1f}ms", frame_count,
+      "[{}] yolo: {:.1f}ms, tracker: {:.1f}ms, aimer: {:.1f}ms, planner: {:.1f}ms", frame_count,
       tools::delta_time(tracker_start, yolo_start) * 1e3,
       tools::delta_time(aimer_start, tracker_start) * 1e3,
-      tools::delta_time(finish, aimer_start) * 1e3);
+      tools::delta_time(planner_start, aimer_start) * 1e3,
+      tools::delta_time(finish, planner_start) * 1e3);
 
     tools::draw_text(
       img,
@@ -101,6 +118,13 @@ int main(int argc, char * argv[])
       fmt::format(
         "gimbal yaw{:.2f}", (tools::eulers(gimbal_q.toRotationMatrix(), 2, 1, 0) * 57.3)[0]),
       {10, 90}, {255, 255, 255});
+
+    tools::draw_text(
+      img,
+      fmt::format(
+        "plan is {},{:.2f},{:.2f},fire:{}", plan.control, plan.yaw * 57.3, plan.pitch * 57.3,
+        plan.fire),
+      {10, 120}, {0, 255, 255});
 
     nlohmann::json data;
 
@@ -125,6 +149,25 @@ int main(int argc, char * argv[])
     data["cmd_control"] = command.control;
     data["shoot"] = command.shoot;
 
+    // MPC 流水线的对应量。plan_* / target_* 保持弧度，键名与单位都和
+    // src/auto_aim_debug_mpc.cpp 一致，方便把两条流水线的曲线叠在一起看
+    data["plan_yaw"] = plan.yaw;
+    data["plan_pitch"] = plan.pitch;
+    data["plan_yaw_vel"] = plan.yaw_vel;
+    data["plan_yaw_acc"] = plan.yaw_acc;
+    data["plan_pitch_vel"] = plan.pitch_vel;
+    data["plan_pitch_acc"] = plan.pitch_acc;
+    data["target_yaw"] = plan.target_yaw;
+    data["target_pitch"] = plan.target_pitch;
+    data["fire"] = plan.fire;
+
+    // 两条流水线的直接差值（度）。只有两边都解出角度时才记，否则
+    // command 无效时 yaw=0 会把差值曲线冲出一个假尖峰
+    if (command.control && plan.control) {
+      data["diff_yaw_deg"] = tools::limit_rad(plan.yaw - command.yaw) * 57.3;
+      data["diff_pitch_deg"] = (plan.pitch - command.pitch) * 57.3;
+    }
+
     if (!targets.empty()) {
       auto target = targets.front();
 
@@ -144,12 +187,21 @@ int main(int argc, char * argv[])
         tools::draw_points(img, image_points, {0, 255, 0});
       }
 
-      // aimer瞄准位置
+      // aimer瞄准位置（红）
       auto aim_point = aimer.debug_aim_point;
       Eigen::Vector4d aim_xyza = aim_point.xyza;
       auto image_points =
         solver.reproject_armor(aim_xyza.head(3), aim_xyza[3], target.armor_type, target.name);
       if (aim_point.valid) tools::draw_points(img, image_points, {0, 0, 255});
+
+      // planner规划瞄准位置（黄）。debug_xyza 是裸 Eigen 向量、没有 valid 标志，
+      // 用 plan.control 当守卫，并挡掉未初始化时的非有限值
+      if (plan.control && planner.debug_xyza.allFinite()) {
+        Eigen::Vector4d plan_xyza = planner.debug_xyza;
+        auto plan_image_points =
+          solver.reproject_armor(plan_xyza.head(3), plan_xyza[3], target.armor_type, target.name);
+        tools::draw_points(img, plan_image_points, {0, 255, 255});
+      }
 
       // 观测器内部数据
       Eigen::VectorXd x = target.ekf_x();
