@@ -14,16 +14,6 @@ namespace auto_aim
 Planner::Planner(const std::string & config_path)
 {
   auto yaml = tools::load(config_path);
-  reload(yaml);
-  tools::logger()->info("[Planner] Config loaded from: {}",
-    std::filesystem::absolute(config_path).string());
-
-  setup_yaw_solver(config_path);
-  setup_pitch_solver(config_path);
-}
-
-void Planner::reload(const YAML::Node & yaml)
-{
   yaw_offset_ = tools::read<double>(yaml, "yaw_offset") / 57.3;
   pitch_offset_ = tools::read<double>(yaml, "pitch_offset") / 57.3;
   fire_thresh_ = tools::read<double>(yaml, "fire_thresh");
@@ -32,10 +22,10 @@ void Planner::reload(const YAML::Node & yaml)
   low_speed_delay_time_ = tools::read<double>(yaml, "low_speed_delay_time");
   outpost_delay_time_ =
     yaml["outpost_delay_time"].IsDefined() ? yaml["outpost_delay_time"].as<double>() : 0.3;
-  tools::logger()->info(
-    "[Planner] yaw_offset={:.2f}deg pitch_offset={:.2f}deg fire_thresh={:.4f} "
-    "decision_speed={:.2f}rad/s outpost_delay_time={:.3f}s",
-    yaw_offset_ * 57.3, pitch_offset_ * 57.3, fire_thresh_, decision_speed_, outpost_delay_time_);
+  tools::logger()->info("[Planner] Config loaded from: {}",
+    std::filesystem::absolute(config_path).string());
+  setup_yaw_solver(config_path);    // 改签名，顺便把 3 次解析降到 1 次
+  setup_pitch_solver(config_path);
 }
 
 Plan Planner::plan(Target target, double bullet_speed)
@@ -98,7 +88,7 @@ Plan Planner::plan(Target target, double bullet_speed)
   plan.pitch_vel = pitch_solver_->work->x(1, HALF_HORIZON);
   plan.pitch_acc = pitch_solver_->work->u(0, HALF_HORIZON);
 
-  auto shoot_offset_ = 2;
+  auto shoot_offset_ = 2;    //到摩擦轮掉速的补偿量，20ms
   plan.fire =
     std::hypot(
       traj(0, HALF_HORIZON + shoot_offset_) - yaw_solver_->work->x(0, HALF_HORIZON + shoot_offset_),

@@ -41,16 +41,4 @@ void Camera::read(cv::Mat & img, std::chrono::steady_clock::time_point & timesta
   camera_->read(img, timestamp);
 }
 
-void Camera::reload(const YAML::Node & yaml)
-{
-  auto exposure_ms = yaml["exposure_ms"].as<double>();
-  if (camera_name_ == "hikrobot") {
-    auto gain = yaml["gain"].as<double>();
-    auto * hik = dynamic_cast<HikRobot *>(camera_.get());
-    if (hik) {
-      hik->update_params(exposure_ms, gain);
-    }
-  }
-}
-
 }  // namespace io
