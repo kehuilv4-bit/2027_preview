@@ -41,9 +41,6 @@ public:
   Plan plan(Target target, double bullet_speed);
   Plan plan(std::optional<Target> target, double bullet_speed);
 
-  /// @brief 热重载偏置参数（从YAML节点）
-  void reload(const YAML::Node & yaml);
-
 private:
   double yaw_offset_;
   double pitch_offset_;
