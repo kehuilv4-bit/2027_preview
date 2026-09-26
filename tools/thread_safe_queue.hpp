@@ -9,7 +9,7 @@
 
 namespace tools
 {
-template <typename T, bool PopWhenFull = false>
+template <typename T, bool PopWhenFull = true>//这里一定为true，保证队列满时丢的是旧数据
 class ThreadSafeQueue
 {
 public:
